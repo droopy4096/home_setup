@@ -1,0 +1,6 @@
+GREEN="\[\033[01;32m\]"
+BLUE="\[\033[01;34m\]"
+RESET="\[\033[00m\]"
+PS1="$GREEN\u$RESET@$GREEN\h$BLUE \w \$$RESET "
+
+export PS1
