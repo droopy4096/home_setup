@@ -3,6 +3,10 @@ escape ^\\
 bindkey "^[Od" prev  # change window with ctrl-left
 bindkey "^[Oc" next  # change window with ctrl-right
 
+shelltitle '$ |shell'
+title shell
+defscrollback 1000
+
 # ugly, with some function
 # caption always "%?%F%{-b bc}%:%{-b bb}%?%C|%D|%M %d|%H|%?%F%{+u wb}%? %L=%-Lw%45>%{+b by}%n%f*%t%{-}%+Lw%-0<"
 
