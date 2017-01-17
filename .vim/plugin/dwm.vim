@@ -1,0 +1,1 @@
+dwm/plugin/dwm.vim
