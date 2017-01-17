@@ -1,0 +1,3 @@
+[submodule ".vim/plugin/dwm"]
+	path = .vim/plugin/dwm
+	url = https://github.com/spolu/dwm.vim.git
