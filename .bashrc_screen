@@ -1,0 +1,9 @@
+if [ "$PS1" ]; then
+  if [ -z "$PROMPT_COMMAND" ]; then
+    case $TERM in
+    screen*)
+          PROMPT_COMMAND='printf "\033k%s:%s\033\\" "${HOSTNAME%%.*}" "${PWD##*/}"'
+      ;;
+    esac
+  fi
+
