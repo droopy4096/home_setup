@@ -2,6 +2,7 @@ if [ "$PS1" ]; then
     case $TERM in
     screen*)
           PROMPT_COMMAND='printf "\033k%s:%s\033\\" "${HOSTNAME%%.*}" "${PWD##*/}"'
+          export PROMPT_COMMAND
       ;;
     esac
 fi
