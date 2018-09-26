@@ -1,0 +1,63 @@
+
+# Requires: ~/.bash_colors
+
+CHECK_MARK=$(echo -e "\u2713")
+if [ -f ~/.bash_colors ]; then
+        . ~/.bash_colors
+        if [ -n "$STY" ]
+        then
+          ## Inside Screen session
+          # PROMPT_DIRTRIM=3
+          # BASE_PS1="$Green>$Dark_Gray\D{%j}$White\A$RESET$Dark_Gray\u$RESET@$Dark_Gray\h$Light_Blue \W \\\$$RESET "
+          BASE_PS1="$Green>$Dark_Gray\D{%j}$White\A$RESET$Light_Blue \W \\\$$RESET "
+          BASE_PS1_SHORT="$Green>$Dark_Gray\D{%j}$White\A$RESET$Light_Blue \\\$$RESET "
+        else
+          ## Non-screen session
+          BASE_PS1="$Green>$Dark_Gray\D{%j}$White\A$RESET$Dark_Gray\u$RESET@$Dark_Gray\h$Light_Blue \W \\\$$RESET "
+          BASE_PS1_SHORT="$Green>$Dark_Gray\D{%j}$White\A$RESET$Dark_Gray\u$RESET@$Dark_Gray\h$Light_Blue \\\$$RESET "
+        fi
+        PS1=${BASE_PS1}
+        PS1_SHORT=${BASE_PS1_SHORT}
+fi
+export PS1 PS1_SHORT
+
+whats_my_repo(){
+  # MYGREEN="\[\033[1;32m\]"
+  MYGREEN="\033[1;32m"
+  _GIT_DIR=$(git rev-parse --show-toplevel 2> /dev/null )
+  unset GIT_NAME
+  [ -n "$_GIT_DIR" ] && GIT_NAME=$(basename $_GIT_DIR)
+  # [ -n "$GIT_NAME" ] && echo -en "$MYGREEN>${GIT_NAME} "
+  if [ -n "$GIT_NAME" ] 
+  then
+    git fetch -q
+    LOCAL_BRANCH=$(git branch --format='%(refname:lstrip=2)')
+    REMOTE_BRANCH=$(git branch --format='%(upstream:lstrip=2)')
+    LOCAL_CHANGES=$(git status --porcelain | wc -l)
+    REMOTE_STATUS=$(git status --short --ahead-behind -b --porcelain | awk '{sym=""; if ($3=="[ahead") {sym="+"}; if ($3=="[behind") {sym="-"}; print sym $4}'| sed -e 's/\]//g')
+    REMOTE_COLOR=$Dark_Gray
+    if [ -n "$REMOTE_STATUS" ]
+    then
+      case ${REMOTE_STATUS:0:1} in
+        '+') REMOTE_COLOR=$Yellow
+            break;;
+        '-') REMOTE_COLOR=$Light_Red
+            break;;
+      esac
+    fi
+    if [ "$LOCAL_CHANGES" -eq 0 ]
+    then
+      # STATUS="${Green}${CHECK_MARK}${RESET}"
+      STATUS=""
+      STATUS_COLOR=${Cyan}
+    else
+      STATUS="${Yellow}+${LOCAL_CHANGES}${RESET}"
+      STATUS_COLOR=${Light_Red}
+    fi
+    PS1_PRE="${Light_Green}${GIT_NAME}${RESET}(${STATUS_COLOR}${LOCAL_BRANCH}${RESET}${STATUS}:${REMOTE_COLOR}${REMOTE_BRANCH}${REMOTE_STATUS}${RESET})"
+    PS1="${PS1_PRE} ${BASE_PS1}"
+    PS1_SHORT="${PS1_PRE} ${BASE_PS1_SHORT}"
+  fi
+  export GIT_NAME
+}
+
