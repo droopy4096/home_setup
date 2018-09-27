@@ -1,4 +1,4 @@
-
+#!/bin/bash
 # Requires: ~/.bash_colors
 
 CHECK_MARK=$(echo -e "\u2713")
@@ -21,7 +21,8 @@ if [ -f ~/.bash_colors ]; then
 fi
 export PS1 PS1_SHORT
 
-whats_my_repo(){
+GIT_CACHE_TTL=${GIT_CACHE_TTL:-2}
+whats_my_git(){
   # MYGREEN="\[\033[1;32m\]"
   MYGREEN="\033[1;32m"
   _GIT_DIR=$(git rev-parse --show-toplevel 2> /dev/null )
@@ -30,9 +31,18 @@ whats_my_repo(){
   # [ -n "$GIT_NAME" ] && echo -en "$MYGREEN>${GIT_NAME} "
   if [ -n "$GIT_NAME" ] 
   then
-    git fetch -q
-    LOCAL_BRANCH=$(git branch --format='%(refname:lstrip=2)')
-    REMOTE_BRANCH=$(git branch --format='%(upstream:lstrip=2)')
+    FILE_MATCHES=$(find $_GIT_DIR/.git/FETCH_HEAD -mmin +${GIT_CACHE_TTL} 2> /dev/null) 
+    FIND_EXIT_CODE=$?
+    if [ -n "${FIND_MATCHES}" ]
+    then
+      git fetch -q
+    fi
+
+    BRANCHES=$(git branch --format='%(refname:lstrip=2)|%(upstream:lstrip=2)')
+    REMOTE_BRANCH=${BRANCHES##*|}
+    LOCAL_BRANCH=${BRANCHES%%|*}
+    # LOCAL_BRANCH=$(git branch --format='%(refname:lstrip=2)')
+    # REMOTE_BRANCH=$(git branch --format='%(upstream:lstrip=2)')
     LOCAL_CHANGES=$(git status --porcelain | wc -l)
     REMOTE_STATUS=$(git status --short --ahead-behind -b --porcelain | awk '{sym=""; if ($3=="[ahead") {sym="+"}; if ($3=="[behind") {sym="-"}; print sym $4}'| sed -e 's/\]//g')
     REMOTE_COLOR=$Dark_Gray
@@ -40,9 +50,9 @@ whats_my_repo(){
     then
       case ${REMOTE_STATUS:0:1} in
         '+') REMOTE_COLOR=$Yellow
-            break;;
+            ;;
         '-') REMOTE_COLOR=$Light_Red
-            break;;
+            ;;
       esac
     fi
     if [ "$LOCAL_CHANGES" -eq 0 ]
