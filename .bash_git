@@ -38,13 +38,14 @@ whats_my_git(){
       git fetch -q
     fi
 
-    BRANCHES=$(git branch --format='%(refname:lstrip=2)|%(upstream:lstrip=2)')
+    LBRANCH=$(git rev-parse --abbrev-ref HEAD)
+    BRANCHES=$(git branch --list --format='%(refname:lstrip=2)|%(upstream:lstrip=2)' ${LBRANCH})
     REMOTE_BRANCH=${BRANCHES##*|}
     LOCAL_BRANCH=${BRANCHES%%|*}
     # LOCAL_BRANCH=$(git branch --format='%(refname:lstrip=2)')
     # REMOTE_BRANCH=$(git branch --format='%(upstream:lstrip=2)')
     LOCAL_CHANGES=$(git status --porcelain | wc -l)
-    REMOTE_STATUS=$(git status --short --ahead-behind -b --porcelain | awk '{sym=""; if ($3=="[ahead") {sym="+"}; if ($3=="[behind") {sym="-"}; print sym $4}'| sed -e 's/\]//g')
+    REMOTE_STATUS=$(git status --short --ahead-behind -b --porcelain | awk '/(\[.*\])/ {sym=""; if ($3=="[ahead") {sym="+"}; if ($3=="[behind") {sym="-"}; print sym $4}'| sed -e 's/\]//g')
     REMOTE_COLOR=$Dark_Gray
     if [ -n "$REMOTE_STATUS" ]
     then

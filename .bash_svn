@@ -40,7 +40,7 @@ whats_my_svn(){
     PS1="${BASE_PS1}"
     PS1_SHORT="${BASE_PS1_SHORT}"
   fi
+  # export PS1 PS1_SHORT
   export SVN_NAME
 }
 
-export PS1 PS1_SHORT
