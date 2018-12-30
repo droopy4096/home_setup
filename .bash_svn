@@ -1,0 +1,46 @@
+#!/bin/bash
+# Requires: ~/.bash_colors
+
+SVN_CACHE_TTL=${SVN_CACHE_TTL:-2}
+whats_my_svn(){
+  # MYGREEN="\[\033[1;32m\]"
+  MYGREEN="\033[1;32m"
+  SVN_INFO_XML=$(svn info --xml 2> /dev/null)
+  SVN_EXIT_STATUS=$?
+  if [ "$SVN_EXIT_STATUS" -eq 0 ]
+  then
+    # it's an SVN repo
+    ALL_CHANGES=$(svn status)
+    LOCAL_CHANGES=$(echo "${ALL_CHANGES}" | grep -vF '?' | wc -l)
+    UNTRACKED_CHANGES=$(echo "${ALL_CHANGES}" | grep -F '?' | wc -l)
+    REPO_PATH=$(echo "$SVN_INFO_XML" | xpath -q -e '/info/entry/wc-info/wcroot-abspath/text()')
+    REPO_URL=$(echo "$SVN_INFO_XML" | xpath -q -e '/info/entry/url/text()')
+    SVN_NAME=$(basename $REPO_PATH)
+
+    if [ "$LOCAL_CHANGES" -eq 0 ]
+    then
+      STATUS=""
+      STATUS_COLOR=${Cyan}
+    else
+      STATUS="${Light_Red}+${LOCAL_CHANGES}${RESET}"
+      STATUS_COLOR=${Light_Red}
+    fi
+    if [ "$UNTRACKED_CHANGES" -eq 0 ]
+    then
+      UNTRACKED_STATUS=""
+      UNTRACKED_STATUS_COLOR=${Cyan}
+    else
+      UNTRACKED_STATUS="/${Yellow}+${UNTRACKED_CHANGES}${RESET}"
+      UNTRACKED_STATUS_COLOR=${Light_Red}
+    fi
+    PS1_PRE="${Light_Green}${SVN_NAME}${RESET}(${STATUS}${UNTRACKED_STATUS})"
+    PS1="${PS1_PRE} ${BASE_PS1}"
+    PS1_SHORT="${PS1_PRE} ${BASE_PS1_SHORT}"
+  else
+    PS1="${BASE_PS1}"
+    PS1_SHORT="${BASE_PS1_SHORT}"
+  fi
+  # export PS1 PS1_SHORT
+  export SVN_NAME
+}
+

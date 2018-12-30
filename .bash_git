@@ -1,0 +1,88 @@
+#!/bin/bash
+# Requires: ~/.bash_colors
+
+SEPARATOR_COLOR=${SEPARATOR_COLOR:-${Green}}
+HISTORY_COLOR=${HISTORY_COLOR:-${Dark_Gray}}
+TIMESTAMP_COLOR=${TIMESTAMP_COLOR:-${White}}
+PATH_COLOR=${PATH_COLOR:-${Light_Blue}}
+USERNAME_COLOR=${USERNAME_COLOR:-${Dark_Gray}}
+HOSTNAME_COLOR=${HOSTNAME_COLOR:-${Dark_Gray}}
+CHECK_MARK=$(echo -e "\u2713")
+if [ -f ~/.bash_colors ]; then
+        . ~/.bash_colors
+        if [ -n "$STY" ]
+        then
+          ## Inside Screen session
+          # PROMPT_DIRTRIM=3
+          # BASE_PS1="$Green>$Dark_Gray\D{%j}$White\A$RESET$Dark_Gray\u$RESET@$Dark_Gray\h$Light_Blue \W \\\$$RESET "
+          BASE_PS1="$SEPARATOR_COLOR>$HISTORY_COLOR\D{%j}$TIMESTAMP_COLOR\A$RESET$PATH_COLOR \W \\\$$RESET "
+          BASE_PS1_SHORT="$SEPARATOR_COLOR>$HISTORY_COLOR\D{%j}$TIMESTAMP_COLOR\A$RESET$PATH_COLOR \\\$$RESET "
+        else
+          ## Non-screen session
+          BASE_PS1="$SEPARATOR_COLOR>$HISTORY_COLOR\D{%j}$TIMESTAMP_COLOR\A$RESET$USERNAME_COLOR\u$RESET@$HOSTNAME_COLOR\h$PATH_COLOR \W \\\$$RESET "
+          BASE_PS1_SHORT="$SEPARATOR_COLOR>$HISTORY_COLOR\D{%j}$TIMESTAMP_COLOR\A$RESET$USERNAME_COLOR\u$RESET@$HOSTNAME_COLOR\h$PATH_COLOR \\\$$RESET "
+        fi
+        PS1=${BASE_PS1}
+        PS1_SHORT=${BASE_PS1_SHORT}
+fi
+export PS1 PS1_SHORT
+
+GIT_CACHE_TTL=${GIT_CACHE_TTL:-2}
+whats_my_git(){
+  # MYGREEN="\[\033[1;32m\]"
+  MYGREEN="\033[1;32m"
+  _GIT_DIR=$(git rev-parse --show-toplevel 2> /dev/null )
+  unset GIT_NAME
+  [ -n "$_GIT_DIR" ] && GIT_NAME=$(basename $_GIT_DIR)
+  # [ -n "$GIT_NAME" ] && echo -en "$MYGREEN>${GIT_NAME} "
+  if [ -n "$GIT_NAME" ] 
+  then
+    FILE_MATCHES=$(find $_GIT_DIR/.git/FETCH_HEAD -mmin +${GIT_CACHE_TTL} 2> /dev/null) 
+    FIND_EXIT_CODE=$?
+    if [ -n "${FIND_MATCHES}" ]
+    then
+      git fetch -q
+    fi
+
+    LBRANCH=$(git rev-parse --abbrev-ref HEAD)
+    BRANCHES=$(git branch --list --format='%(refname:lstrip=2)|%(upstream:lstrip=2)' ${LBRANCH} 2>/dev/null)
+    if [ -z $? ]
+    then
+      REMOTE_BRANCH=${BRANCHES##*|}
+      LOCAL_BRANCH=${BRANCHES%%|*}
+    else
+      BRANCHES=$(git branch --list ${LBRANCH} 2>/dev/null | awk '/\*/ { print $2;}')
+      # .git/refs/remotes/origin/HEAD:ref: refs/remotes/origin/master
+      REMOTE_BRANCH=$(sed 's#ref: refs/remotes/##g' ${_GIT_DIR}/.git/refs/remotes/origin/HEAD )
+      LOCAL_BRANCH=${BRANCHES}
+    fi
+    # LOCAL_BRANCH=$(git branch --format='%(refname:lstrip=2)')
+    # REMOTE_BRANCH=$(git branch --format='%(upstream:lstrip=2)')
+    LOCAL_CHANGES=$(git status --porcelain | wc -l | awk '{$1=$1};1' )
+    REMOTE_STATUS=$(git status --short --ahead-behind -b --porcelain 2>/dev/null | awk '/(\[.*\])/ {sym=""; if ($3=="[ahead") {sym="+"}; if ($3=="[behind") {sym="-"}; print sym $4}'| sed -e 's/\]//g')
+    REMOTE_COLOR=$Dark_Gray
+    if [ -n "$REMOTE_STATUS" ]
+    then
+      case ${REMOTE_STATUS:0:1} in
+        '+') REMOTE_COLOR=$Yellow
+            ;;
+        '-') REMOTE_COLOR=$Light_Red
+            ;;
+      esac
+    fi
+    if [ "$LOCAL_CHANGES" -eq 0 ]
+    then
+      # STATUS="${Green}${CHECK_MARK}${RESET}"
+      STATUS=""
+      STATUS_COLOR=${Cyan}
+    else
+      STATUS="${Yellow}+${LOCAL_CHANGES}${RESET}"
+      STATUS_COLOR=${Light_Red}
+    fi
+    PS1_PRE="${Light_Green}${GIT_NAME}${RESET}(${STATUS_COLOR}${LOCAL_BRANCH}${RESET}${STATUS}:${REMOTE_COLOR}${REMOTE_BRANCH}${REMOTE_STATUS}${RESET})"
+    PS1="${PS1_PRE} ${BASE_PS1}"
+    PS1_SHORT="${PS1_PRE} ${BASE_PS1_SHORT}"
+  fi
+  export GIT_NAME
+}
+

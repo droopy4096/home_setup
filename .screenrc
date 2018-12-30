@@ -2,9 +2,11 @@ escape ^\\
 # doesn't seem to work :(
 bindkey "^[Od" prev  # change window with ctrl-left
 bindkey "^[Oc" next  # change window with ctrl-right
+bind ^w windowlist
 
 shelltitle '$ |shell'
 title shell
+term screen-256color
 defscrollback 1000
 
 # ugly, with some function
@@ -26,4 +28,4 @@ defscrollback 1000
 # closest to the one I want
 # caption always "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= %c"
 ### caption always "%{= kw}%H : %{= kG}%-w%{= gk}%n %t%{-}%+w %-= %c"
-caption always "%{= kw}%{+b w}%S%{-b w} %H : %{= kG}%-w%{= gk}%n %t%{-}%+w %-= %c"
+caption always "%{= kw}%{+b g}%S%{+b k} %H : %{= kG}%-w%{= gk}%n %t%{-}%+w %-= %c"
