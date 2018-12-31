@@ -1,3 +1,25 @@
+Contents
+========
+
+* .bash_root - bash profile for root account
+* .bash_color - colorized prompt 
+* .bash_git - Git prompt
+* .bash_svn - SVN prompt
+* .screenrc - configuration for GNU Screen
+* Vim:
+  
+  * .vimrc - base Vim config
+  * .vim - plugins etc.
+
+* LXDE:
+
+  * .config/lxsession
+  * .config/lxpanel
+  * .config/openbox
+  * .config/lxterminal
+
+
+
 
 Color prompt
 ============

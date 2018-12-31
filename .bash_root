@@ -1,0 +1,6 @@
+unset PROMPT_COMMAND
+export -n PROMPT_COMMAND
+COLOR_RED="\[\e[01;31m\]"
+COLOR_RESET="\[\e[00m\]"
+export PS1="${COLOR_RED}\u${COLOR_RESET}@${COLOR_RED}\h \[\e[00m\]\w ${COLOR_RED}\\$ ${COLOR_RESET}"
+
