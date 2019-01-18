@@ -11,8 +11,8 @@ whats_my_svn(){
   then
     # it's an SVN repo
     ALL_CHANGES=$(svn status)
-    LOCAL_CHANGES=$(echo "${ALL_CHANGES}" | grep -vF '?' | wc -l)
-    UNTRACKED_CHANGES=$(echo "${ALL_CHANGES}" | grep -F '?' | wc -l)
+    LOCAL_CHANGES=$(echo -n "${ALL_CHANGES}" | grep -vF '?' | wc -l)
+    UNTRACKED_CHANGES=$(echo -n "${ALL_CHANGES}" | grep -F '?' | wc -l)
     REPO_PATH=$(echo "$SVN_INFO_XML" | xpath -q -e '/info/entry/wc-info/wcroot-abspath/text()')
     REPO_URL=$(echo "$SVN_INFO_XML" | xpath -q -e '/info/entry/url/text()')
     SVN_NAME=$(basename $REPO_PATH)
@@ -33,6 +33,7 @@ whats_my_svn(){
       UNTRACKED_STATUS="/${Yellow}+${UNTRACKED_CHANGES}${RESET}"
       UNTRACKED_STATUS_COLOR=${Light_Red}
     fi
+    [ -z "$STATUS$UNTRACKED_STATUS" ] && STATUS="${Light_Green}OK${RESET}"
     PS1_PRE="${Light_Green}${SVN_NAME}${RESET}(${STATUS}${UNTRACKED_STATUS})"
     PS1="${PS1_PRE} ${BASE_PS1}"
     PS1_SHORT="${PS1_PRE} ${BASE_PS1_SHORT}"
