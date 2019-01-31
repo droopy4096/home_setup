@@ -1,0 +1,22 @@
+#!/bin/bash
+
+source_file(){
+  [ -f $1 ] && . $1
+}
+
+unset PROMPT_COMMAND
+export -n PROMPT_COMMAND
+export -n PS1 PS1_SHORT
+export PS1 PS1_SHORT
+source_file ~/.bash_colors
+source_file ~/.bash_prompt
+source_file ~/.bash_autoprompt.local
+GIT_CACHE_TTL=1
+source_file ~/.bash_git
+source_file ~/.bash_svn
+whats_my_repo(){
+  whats_my_svn
+  whats_my_git
+}
+export PROMPT_COMMAND="whats_my_repo"
+
