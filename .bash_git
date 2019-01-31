@@ -55,7 +55,8 @@ whats_my_git(){
       LOCAL_BRANCH=${BRANCHES}
       # .git/refs/remotes/origin/HEAD:ref: refs/remotes/origin/master
       # REMOTE_BRANCH=$(sed 's#ref: refs/remotes/##g' ${_GIT_DIR}/.git/refs/remotes/origin/HEAD )
-      REMOTE_BRANCH=$(git rev-parse --abbrev-ref "${LOCAL_BRANCH}@{upstream}")
+      # REMOTE_BRANCH=$(git rev-parse --abbrev-ref "${LOCAL_BRANCH}@{upstream}")
+      REMOTE_BRANCH=$(git rev-parse --abbrev-ref --symbolic-full-name @{u})
     fi
     # LOCAL_BRANCH=$(git branch --format='%(refname:lstrip=2)')
     # REMOTE_BRANCH=$(git branch --format='%(upstream:lstrip=2)')
