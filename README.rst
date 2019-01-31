@@ -26,7 +26,7 @@ Color prompt
 
 simply add to your .bashrc::
 
-  . bash_colors
+  . .bash_colors
 
 Git Prompt
 ==========
@@ -48,7 +48,7 @@ add to .bashrc following::
   GIT_CACHE_TTL=1
   HOSTMANE_COLOR=${Cyan}
   SEPARATOR_COLOR=${Purple}
-  . bash_git
+  . ~/.bash_git
   export PROMPT_COMMAND=whats_my_git
 
 SVN prompt
@@ -65,15 +65,15 @@ Setup
 
 modify  .bashrc::
 
-  
+  . ~/.bash_colors  
   unset PROMPT_COMMAND
   export -n PROMPT_COMMAND
   export PS1 PS1_SHORT
   GIT_CACHE_TTL=1
   HOSTMANE_COLOR=${Cyan}
   SEPARATOR_COLOR=${Purple}
-  . bash_git
-  . bash_svn
+  . ~/.bash_git
+  . ~/.bash_svn
   export PROMPT_COMMAND=whats_my_repo
   whats_my_repo(){
     whats_my_svn
