@@ -11,12 +11,13 @@ export PS1 PS1_SHORT
 source_file ~/.bash_colors
 source_file ~/.bash_prompt
 source_file ~/.bash_autoprompt.local
+ENABLE_GIT_PROMPT=${ENABLE_GIT_PROMPT:-"yes"}
 GIT_CACHE_TTL=1
-source_file ~/.bash_git
-source_file ~/.bash_svn
+[ "$ENABLE_GIT_PROMPT" == 'yes' ] && source_file ~/.bash_git
+[ "$ENABLE_SVN_PROMPT" == 'yes' ] && source_file ~/.bash_svn
 whats_my_repo(){
-  whats_my_svn
-  whats_my_git
+  [ "$ENABLE_SVN_PROMPT" == 'yes' ] && whats_my_svn
+  [ "$ENABLE_GIT_PROMPT" == 'yes' ] && whats_my_git
 }
 export PROMPT_COMMAND="whats_my_repo"
 

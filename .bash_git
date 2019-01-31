@@ -58,6 +58,9 @@ whats_my_git(){
     PS1_PRE="${Light_Green}${GIT_NAME}${RESET}(${STATUS_COLOR}${LOCAL_BRANCH}${RESET}${STATUS}:${REMOTE_COLOR}${REMOTE_BRANCH}${REMOTE_STATUS}${RESET})"
     PS1="${PS1_PRE} ${BASE_PS1}"
     PS1_SHORT="${PS1_PRE} ${BASE_PS1_SHORT}"
+  else
+    PS1="${BASE_PS1}"
+    PS1_SHORT="${BASE_PS1_SHORT}"
   fi
   export GIT_NAME
 }
