@@ -63,22 +63,18 @@ Requirements
 Setup
 -----
 
-modify  .bashrc::
+run setup script::
 
-  . ~/.bash_colors  
-  unset PROMPT_COMMAND
-  export -n PROMPT_COMMAND
-  export PS1 PS1_SHORT
-  GIT_CACHE_TTL=1
-  HOSTMANE_COLOR=${Cyan}
-  SEPARATOR_COLOR=${Purple}
-  . ~/.bash_git
-  . ~/.bash_svn
-  export PROMPT_COMMAND=whats_my_repo
-  whats_my_repo(){
-    whats_my_svn
-    whats_my_git
-  }
+  $ ./setup.sh
+  
+this will:
+
+* create all the symlinks
+* add entry to .bashrc::
+
+   . ~/.bash_autoprompt
+   
+
 
 *NOTE* order of execution is important at the moment!
 
