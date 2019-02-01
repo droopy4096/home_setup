@@ -32,6 +32,7 @@ Git Prompt
 Requirements
 ------------
 
+* git-2.20+
 * .bash_colors to be enabled (see above)
 
 
