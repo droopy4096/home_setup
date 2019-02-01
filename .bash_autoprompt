@@ -16,8 +16,8 @@ GIT_CACHE_TTL=1
 [ "$ENABLE_GIT_PROMPT" == 'yes' ] && source_file ~/.bash_git
 [ "$ENABLE_SVN_PROMPT" == 'yes' ] && source_file ~/.bash_svn
 whats_my_repo(){
-  [ "$ENABLE_SVN_PROMPT" == 'yes' ] && whats_my_svn
   [ "$ENABLE_GIT_PROMPT" == 'yes' ] && whats_my_git
+  [ "$ENABLE_SVN_PROMPT" == 'yes' ] && whats_my_svn
 }
 export PROMPT_COMMAND="whats_my_repo"
 
