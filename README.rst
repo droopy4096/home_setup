@@ -19,8 +19,6 @@ Contents
   * .config/lxterminal
 
 
-
-
 Color prompt
 ============
 
