@@ -22,6 +22,7 @@ Contents
 Color prompt
 ============
 
+
 simply add to your .bashrc::
 
   . .bash_colors
