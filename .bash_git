@@ -18,6 +18,8 @@ whats_my_git(){
       git fetch -q
     fi
 
+    STASHES=$(git stash list | wc -l)
+
     LBRANCH=$(git rev-parse --abbrev-ref HEAD)
     BRANCHES=$(git branch --list --format='%(refname:lstrip=2)|%(upstream:lstrip=2)' ${LBRANCH} 2>/dev/null)
     if [ -z $? ]
@@ -46,6 +48,13 @@ whats_my_git(){
             ;;
       esac
     fi
+    if [ "$STASHES" -gt 0 ]
+    then
+      STASH_STATUS="${Light_Purple}^${STASHES}${RESET}"
+    else
+      STASH_STATUS=""
+    fi
+
     if [ "$LOCAL_CHANGES" -eq 0 ]
     then
       # STATUS="${Green}${CHECK_MARK}${RESET}"
@@ -55,7 +64,7 @@ whats_my_git(){
       STATUS="${Yellow}+${LOCAL_CHANGES}${RESET}"
       STATUS_COLOR=${Light_Red}
     fi
-    PS1_PRE="${Light_Green}${GIT_NAME}${RESET}(${STATUS_COLOR}${LOCAL_BRANCH}${RESET}${STATUS}:${REMOTE_COLOR}${REMOTE_BRANCH}${REMOTE_STATUS}${RESET})"
+    PS1_PRE="${Light_Green}${GIT_NAME}${RESET}(${STATUS_COLOR}${LOCAL_BRANCH}${RESET}${STATUS}${STASH_STATUS}:${REMOTE_COLOR}${REMOTE_BRANCH}${REMOTE_STATUS}${RESET})"
     PS1="${PS1_PRE} ${BASE_PS1}"
     PS1_SHORT="${PS1_PRE} ${BASE_PS1_SHORT}"
   else
