@@ -14,6 +14,7 @@ link_file ${BASH_HOME}/.bash_prompt
 link_file ${BASH_HOME}/.bash_autoprompt
 link_file ${BASH_HOME}/.bash_git
 link_file ${BASH_HOME}/.bash_svn
+link_file ${BASH_HOME}/.xpath.py
 
 if grep -qF '. ${HOME}/.bash_autoprompt' ~/.bashrc
 then

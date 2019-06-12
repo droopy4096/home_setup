@@ -7,14 +7,22 @@ whats_my_svn(){
   MYGREEN="\033[1;32m"
   SVN_INFO_XML=$(svn info --xml 2> /dev/null)
   SVN_EXIT_STATUS=$?
+  if [ "$USE_PYTHON_XPATH" == "yes" ]
+  then
+    REPO_PATH_CMD="${HOME}/.xpath.py ./entry/wc-info/wcroot-abspath"
+    REPO_URL_CMD="${HOME}/.xpath.py ./entry/url"
+  else
+    REPO_PATH_CMD="xpath -q -e '/info/entry/wc-info/wcroot-abspath/text()'"
+    REPO_URL_CMD="xpath -q -e '/info/entry/url/text()'"
+  fi
   if [ "$SVN_EXIT_STATUS" -eq 0 ]
   then
     # it's an SVN repo
     ALL_CHANGES=$(svn status)
     LOCAL_CHANGES=$(echo -n "${ALL_CHANGES}" | grep -vF '?' | wc -l | awk '{$1=$1};1')
     UNTRACKED_CHANGES=$(echo -n "${ALL_CHANGES}" | grep -F '?' | wc -l| awk '{$1=$1};1')
-    REPO_PATH=$(echo "$SVN_INFO_XML" | xpath -q -e '/info/entry/wc-info/wcroot-abspath/text()')
-    REPO_URL=$(echo "$SVN_INFO_XML" | xpath -q -e '/info/entry/url/text()')
+    REPO_PATH=$(echo "$SVN_INFO_XML" | ${REPO_PATH_CMD} )
+    REPO_URL=$(echo "$SVN_INFO_XML" | ${REPO_URL_CMD} )
     SVN_NAME=$(basename $REPO_PATH)
 
     if [ "$LOCAL_CHANGES" -eq 0 ]
@@ -38,9 +46,9 @@ whats_my_svn(){
     PS1_PRE="${Light_Green}${SVN_NAME}${RESET}(${STATUS}${UNTRACKED_STATUS})"
     PS1="${PS1_PRE} ${BASE_PS1}"
     PS1_SHORT="${PS1_PRE} ${BASE_PS1_SHORT}"
-  else
-    PS1="${BASE_PS1}"
-    PS1_SHORT="${BASE_PS1_SHORT}"
+  # else
+    # PS1="${BASE_PS1}"
+    # PS1_SHORT="${BASE_PS1_SHORT}"
   fi
   # export PS1 PS1_SHORT
   export SVN_NAME

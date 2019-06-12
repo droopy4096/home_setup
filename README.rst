@@ -19,10 +19,9 @@ Contents
   * .config/lxterminal
 
 
-
-
 Color prompt
 ============
+
 
 simply add to your .bashrc::
 
@@ -34,7 +33,13 @@ Git Prompt
 Requirements
 ------------
 
+
+* git-2.20+ (tested)
 * .bash_colors to be enabled (see above)
+
+  * on MacOS::
+
+    brew upgrade git
 
 
 Setup
