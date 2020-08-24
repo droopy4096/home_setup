@@ -9,6 +9,7 @@ link_file(){
   [ -L ${linked_file} ] || ln -s $1
 }
 
+link_file ${BASH_HOME}/.colors
 link_file ${BASH_HOME}/.bash_colors
 link_file ${BASH_HOME}/.bash_prompt
 link_file ${BASH_HOME}/.bash_autoprompt
