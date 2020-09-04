@@ -1,4 +1,6 @@
 #!/bin/sh
 
 KUBECONFIG=${HOME}/.kube/config
-docker run --rm -it -v $KUBECONFIG:/root/.kube/config quay.io/derailed/k9s $@
+. ${HOME}/.kube_helper
+
+docker run --rm -it -v $KUBECONFIG:/root/.kube/config quay.io/derailed/k9s ${NAMESPACE} ${CONTEXT} $@
