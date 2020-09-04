@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if command -v kubectl > /dev/null 2>&1
+then
+    source <(kubectl completion bash)
+    complete -o default -F __start_kubectl k
+fi
+
+if command -v helm > /dev/null 2>&1
+then
+    source <(helm completion bash)
+    complete -o default -F __start_helm h
+fi
