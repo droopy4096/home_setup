@@ -2,4 +2,9 @@
 
 . ${HOME}/.kube_helper
 
-kubectl ${CONTEXT} ${NAMESPACE} $@
+if ( echo "$@" | grep -qe 'hns' )
+then
+  kubectl $@ ${CONTEXT} ${NAMESPACE}
+else
+  kubectl ${CONTEXT} ${NAMESPACE} $@
+fi
