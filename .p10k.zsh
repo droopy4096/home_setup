@@ -1560,7 +1560,7 @@
     prompt_ktools
   }
 
-  typeset -g POWERLEVEL9K_KTOOLS_SHOW_ON_COMMAND='k|h|kns|kctx|klogs|k9s|kcopy|kexec|kpod'
+  typeset -g POWERLEVEL9K_KTOOLS_SHOW_ON_COMMAND='k|h|kns|kctx|klogs|k9s|k9s.sh|kcopy|kexec|kpod'
   typeset -g POWERLEVEL9K_KTOOLS_FOREGROUND=white
   typeset -g POWERLEVEL9K_KTOOLS_BACKGROUND=blue
 

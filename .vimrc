@@ -1,6 +1,6 @@
 set bg=dark
-colo darkblue
-" set foldmethod=indent
+set foldmethod=syntax
+set foldlevel=2
 set tabstop=2
 set expandtab
 set softtabstop=2
