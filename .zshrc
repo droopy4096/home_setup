@@ -46,7 +46,13 @@ setopt HIST_IGNORE_ALL_DUPS
 
 # autoload -U colors
 #colors
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+if [ -r ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme ] ; then
+  source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
+fi
+
+if [ -r ~/powerlevel10k/powerlevel10k.zsh-theme ] ; then
+  source ~/powerlevel10k/powerlevel10k.zsh-theme
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -63,12 +69,9 @@ add_to_path ${HOME}/work/kubernetes-tools/bin
 add_to_path ${HOME}/bin/adr-tools/src
 add_to_path ${HOME}/.local/bin
 
-source <(kubectl completion zsh)
-source <(helm completion zsh)
-compdef k=kubectl
-compdef h=helm
-
-export KUBECONFIG=$HOME/.kube/config
+if [ -r ${HOME}/.kube/config ]; then
+  export KUBECONFIG=$HOME/.kube/config
+fi
 
 setopt interactivecomments
 
@@ -83,12 +86,19 @@ alias ll="exa -l --git"
 alias yaml-diff dyff
 alias diff-yaml dyff
 
-alias work_on=work_on.sh
-alias worktree=work_on.sh
-
 if [ -r ${HOME}/.zshrc.local ]; then
   source ${HOME}/.zshrc.local
 fi
+
+if command -v kubectl > /dev/null; then
+  source <(kubectl completion zsh)
+  compdef k=kubectl
+fi
+if command -v helm > /dev/null; then
+  source <(helm completion zsh)
+  compdef h=helm
+fi
+
 
 ## Should be the last line:
 ### dnf install zsh-syntax-highlighting
