@@ -83,15 +83,22 @@ alias ll="exa -l --git"
 alias yaml-diff dyff
 alias diff-yaml dyff
 
-alias work_on=work_on.sh
-alias worktree=work_on.sh
-
 if [ -r ${HOME}/.zshrc.local ]; then
   source ${HOME}/.zshrc.local
+fi
+
+export GRAPH_VIEWER=gwenview
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
+if [ -r ${HOME}/.zsh/zsh-hist/zsh-hist.plugin.zsh ]; then
+  source ${HOME}/.zsh/zsh-hist/zsh-hist.plugin.zsh
 fi
 
 ## Should be the last line:
 ### dnf install zsh-syntax-highlighting
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-export GRAPH_VIEWER=gwenview
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+

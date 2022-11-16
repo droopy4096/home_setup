@@ -38,3 +38,5 @@ set list
 " open all windows side-by-side
 " since we use dwm plugin
 all
+
+
