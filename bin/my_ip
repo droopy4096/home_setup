@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# default via 192.168.3.3 dev wlo1 proto dhcp src 192.168.3.194 metric 600
+ip route show default | awk '{print $9}'
