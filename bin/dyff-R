@@ -2,10 +2,20 @@
 
 src_dir=${1}
 dst_dir=${2}
+COLOR=${COLOR:-"auto"}
+
+if [ \( ! -d ${src_dir} \) -o \( ! -d ${dst_dir} \) ]; then
+  echo "Both parameters should be directories"
+  exit 1
+fi
 
 diff -u --label ${src_dir} <(cd $src_dir && find . -type f| sort) --label ${dst_dir} <(cd $dst_dir && find . -type f|sort)
 for f in $(cd $src_dir && find . -type f)
 do
-        dyff bw -b -i ${src_dir}/${f} ${dst_dir}/${f}
+  if [ -f "${src_dir}/${f}" -a -f "${dst_dir}/${f}"  ]; then
+        echo "--- $src_dir/$f"
+        echo "+++ $dst_dir/$f"
+        dyff bw --color=${COLOR} -b -i ${src_dir}/${f} ${dst_dir}/${f}
+  fi
 done
 
