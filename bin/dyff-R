@@ -1,0 +1,11 @@
+#!/bin/sh
+
+src_dir=${1}
+dst_dir=${2}
+
+diff -u --label ${src_dir} <(cd $src_dir && find . -type f| sort) --label ${dst_dir} <(cd $dst_dir && find . -type f|sort)
+for f in $(cd $src_dir && find . -type f)
+do
+        dyff bw -b -i ${src_dir}/${f} ${dst_dir}/${f}
+done
+
