@@ -1,0 +1,21 @@
+#!/bin/zsh
+
+## Requires CVSKit: https://csvkit.readthedocs.io
+
+function aws_accesskey(){
+  local csv_file=$1
+  if [ ! -e "${csv_file}" ] ; then
+    echo "Missing file: ${csv_file}"
+    exit 1
+  fi
+  csvcut -c1 "${csv_file}" | tail -n +2
+}
+
+function aws_secret(){
+  local csv_file=$1
+  if [ ! -e "${csv_file}" ] ; then
+    echo "Missing file: ${csv_file}"
+    exit 1
+  fi
+  csvcut -c2 "${csv_file}" | tail -n +2
+}

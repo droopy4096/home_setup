@@ -85,6 +85,15 @@ alias irb-pry=pry
 alias ll="exa -l --git"
 alias yaml-diff dyff
 alias diff-yaml dyff
+alias xmc="xterm -fa 'Liberation Mono' -fs 10 -e mc"
+
+gctx(){
+  local cmd=${1:-list}
+  if [ $# -gt 1 ]; then
+    shift 1
+  fi
+  gcloud config configurations $cmd $@
+}
 
 if [ -r ${HOME}/.zshrc.local ]; then
   source ${HOME}/.zshrc.local
@@ -106,11 +115,50 @@ if command -v helm > /dev/null; then
   compdef h=helm
 fi
 
-## Should be the last line:
-### dnf install zsh-syntax-highlighting
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
+## Git auto-guesser
+old_command_not_found_handler(){
+  source /etc/profile.d/PackageKit.sh
+  command_not_found_handler $@
+}
+
+old_command_not_found_handle(){
+  source /etc/profile.d/PackageKit.sh
+  command_not_found_handle $@
+}
+
+new_command_not_found_handler(){
+  local _git
+  case $1 in
+    commit|pull|push|merge|clone|rebase)
+      read -t 5 -q _git\?"Git command (y/n)? "
+      [[ "${_git}" == "y" ]] && git $@
+      ;;
+    *)
+      false
+      ;;
+  esac
+}
+
+new_command_not_found_handle(){
+  new_command_not_found_handle $@
+}
+
+command_not_found_handle(){
+  command_not_found_handler $@
+}
+
+command_not_found_handler(){
+  new_command_not_found_handler $@
+  if [[ $? -gt 0 ]]; then
+    old_command_not_found_handler $@
+  fi
+}
+
+## Should be the last line:
+### dnf install zsh-syntax-highlighting
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
