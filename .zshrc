@@ -89,10 +89,18 @@ alias xmc="xterm -fa 'Liberation Mono' -fs 10 -e mc"
 
 gctx(){
   local cmd=${1:-list}
-  if [ $# -gt 1 ]; then
+  if [ $# -ge 1 ]; then
     shift 1
   fi
-  gcloud config configurations $cmd $@
+  if [[ "$cmd" == "list" ]]; then
+    highlight=$(printf "\033[32mTrue\033[0m")
+    # gcloud config configurations $cmd $@ | sed -e "s/ True / $highlight /"
+    gcloud config configurations $cmd $@ | awk '$2 == "True"  { printf "\033[32m%s\033[0m\n", $0 } $2 != "True" { print $0 }'
+  elif [[ "$cmd" == "show" ]]; then
+    gcloud config list
+  else
+    gcloud config configurations $cmd $@
+  fi
 }
 
 if [ -r ${HOME}/.zshrc.local ]; then

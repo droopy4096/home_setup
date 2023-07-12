@@ -1,7 +1,9 @@
 #!/bin/sh
 
 src_dir=${1}
-dst_dir=${2}
+shift
+dst_dir=${1}
+shift
 COLOR=${COLOR:-"auto"}
 
 if [ \( ! -d ${src_dir} \) -o \( ! -d ${dst_dir} \) ]; then
@@ -15,7 +17,7 @@ do
   if [ -f "${src_dir}/${f}" -a -f "${dst_dir}/${f}"  ]; then
         echo "--- $src_dir/$f"
         echo "+++ $dst_dir/$f"
-        dyff bw --color=${COLOR} -b -i ${src_dir}/${f} ${dst_dir}/${f}
+        dyff bw --color=${COLOR} -b -i $@ ${src_dir}/${f} ${dst_dir}/${f}
   fi
 done
 
