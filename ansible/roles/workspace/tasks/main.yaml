@@ -1,0 +1,35 @@
+- name: Install Packages
+  ansible.builtin.include_tasks: "{{ ansible_facts['os_family']|lower }}_packages.yaml"
+
+- name: Get HomeSetup
+  ansible.builtin.git:
+    repo: 'https://github.com/droopy4096/home_setup.git'
+    dest: ~/work/home_setup
+
+- name: Get KubernetesTools
+  ansible.builtin.git:
+    # repo: 'git@github.com:droopy4096/kubernetes-tools.git'
+    repo: 'https://github.com/droopy4096/kubernetes-tools.git'
+    dest: ~/work/kubernetes-tools
+
+- name: Get Worktree Tools
+  ansible.builtin.git:
+    repo: 'https://gitlab.com/dmakovey/worktree-tools.git'
+    dest: ~/work/worktree-tools
+
+- name: Setup Worktree Tools
+  ansible.builtin.lineinfile:
+    path: ~/.zshrc.local
+    create: true
+    search_string: "work/worktree-tools"
+    line: . ${HOME}/work/worktree-tools/worktree.zsh
+    insertafter: EOF
+
+- name: Install Asdf
+  ansible.builtin.import_tasks: asdf.yaml
+
+- name: NeoVim setup 
+  ansible.builtin.import_tasks: neovim_config.yaml
+
+- name: ZSH setup
+  ansible.builtin.import_tasks: zsh.yaml
