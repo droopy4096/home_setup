@@ -1,27 +1,27 @@
 - name: Install Packages
   ansible.builtin.dnf: 
-    name: "{{ item }}"
+    name: 
+      - git
+      - jq
+      - unzip
+      - the_silver_searcher
+      - wget
+      - curl
+      - podman
+      - skopeo
+      - buildah
+      - moby-engine
+      # neovim-related:
+      - neovim
+      - nodejs-npm
+      - ripgrep
+      - fd-find
+      - gcc-c++
+      - libstdc++
+      # Zsh-related
+      - zsh
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
     state: latest
-  with_items:
-    - git
-    - jq
-    - unzip
-    - the_silver_searcher
-    - wget
-    - curl
-    - podman
-    - skopeo
-    - buildah
-    - moby-engine
-    # neovim-related:
-    - neovim
-    - nodejs-npm
-    - ripgrep
-    - fd-find
-    - gcc-c++
-    # Zsh-related
-    - zsh
-    - zsh-autosuggestions
-    - zsh-syntax-highlighting
   become: true
 
