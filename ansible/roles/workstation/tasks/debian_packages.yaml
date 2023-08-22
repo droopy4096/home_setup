@@ -1,0 +1,9 @@
+- name: Install Debian family Packages
+  ansible.builtin.apt: 
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - neovim-qt
+    - fontconfig
+  become: true
+

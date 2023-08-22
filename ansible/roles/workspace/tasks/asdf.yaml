@@ -27,9 +27,9 @@
 
 - name: Install asdf packages
   ansible.builtin.shell: |
-    asdf plugin add {{ item }}
-    asdf install {{ item }} latest
-    asdf global {{ item }} latest
+    ~/.asdf/bin/asdf plugin add {{ item }}
+    ~/.asdf/bin/asdf install {{ item }} latest
+    ~/.asdf/bin/asdf global {{ item }} latest
   args: 
     creates: "~/.asdf/shims/{{ item }}"
   with_items:
@@ -42,9 +42,9 @@
 
 - name: Install jless
   ansible.builtin.shell: |
-    asdf plugin add {{ item }}
-    asdf install {{ item }} latest
-    asdf global {{ item }} latest
+    ~/.asdf/bin/asdf plugin add {{ item }}
+    ~/.asdf/bin/asdf install {{ item }} latest
+    ~/.asdf/bin/asdf global {{ item }} latest
   args: 
     creates: "~/.asdf/shims/{{ item }}"
   with_items:

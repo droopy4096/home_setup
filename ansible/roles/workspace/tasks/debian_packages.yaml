@@ -1,0 +1,27 @@
+- name: Install Debian Packages
+  ansible.builtin.apt: 
+    name: 
+      - git
+      - jq
+      - unzip
+      - silversearcher-ag
+      - wget
+      - curl
+      - podman
+      - skopeo
+      - buildah
+      - docker.io
+      # neovim-related:
+      - neovim
+      - npm
+      - ripgrep
+      - fd-find
+      - g++
+      - libstdc++-10-dev
+      # Zsh-related
+      - zsh
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
+    state: latest
+  become: true
+
