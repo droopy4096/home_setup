@@ -1,0 +1,56 @@
+  
+nerd_fonts_version: 3.0.2
+
+workspace_redhat_packages: 
+  - screen
+  - keychain
+  - git
+  - jq
+  - unzip
+  - the_silver_searcher
+  - wget
+  - curl
+  - podman
+  - skopeo
+  - buildah
+  - moby-engine
+  # neovim-related:
+  - neovim
+  - nodejs-npm
+  - ripgrep
+  - fd-find
+  - gcc-c++
+  - libstdc++
+  # Zsh-related
+  - zsh
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting
+
+workstation_redhat_packages:
+  - neovim-qt
+  - fontconfig
+
+workspace_debian_packages:
+  - screen
+  - keychain
+  - git
+  - jq
+  - unzip
+  - silversearcher-ag
+  - wget
+  - curl
+  - podman
+  - skopeo
+  - buildah
+  - docker.io
+  # neovim-related:
+  - neovim
+  - npm
+  - ripgrep
+  - fd-find
+  - g++
+  - libstdc++-10-dev
+  # Zsh-related
+  - zsh
+  - zsh-autosuggestions
+  - zsh-syntax-highlighting

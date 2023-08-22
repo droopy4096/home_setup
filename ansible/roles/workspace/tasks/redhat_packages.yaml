@@ -1,29 +1,6 @@
 - name: Install Packages
   ansible.builtin.dnf: 
-    name: 
-      - screen
-      - keychain
-      - git
-      - jq
-      - unzip
-      - the_silver_searcher
-      - wget
-      - curl
-      - podman
-      - skopeo
-      - buildah
-      - moby-engine
-      # neovim-related:
-      - neovim
-      - nodejs-npm
-      - ripgrep
-      - fd-find
-      - gcc-c++
-      - libstdc++
-      # Zsh-related
-      - zsh
-      - zsh-autosuggestions
-      - zsh-syntax-highlighting
+    name: "{{ workspace_redhat_packages }}"
     state: latest
   become: true
 
