@@ -1,6 +1,7 @@
 - name: Install Debian Packages
   ansible.builtin.apt: 
     name: 
+      - screen
       - keychain
       - git
       - jq

@@ -1,0 +1,14 @@
+- name: Fetch HomeSetup
+  ansible.builtin.git:
+    repo: 'https://github.com/droopy4096/home_setup.git'
+    dest: ~/work/home_setup
+
+- name: Add homedir configs configs
+  ansible.builtin.file:
+    src: ~/work/home_setup/{{ item }}
+    dest: ~/{{ item }}
+    state: link
+  with_items:
+    - .zshrc
+    - .p10k.zsh
+    - .screenrc

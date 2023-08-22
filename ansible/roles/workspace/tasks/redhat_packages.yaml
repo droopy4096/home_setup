@@ -1,6 +1,8 @@
 - name: Install Packages
   ansible.builtin.dnf: 
     name: 
+      - screen
+      - keychain
       - git
       - jq
       - unzip

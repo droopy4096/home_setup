@@ -1,19 +1,8 @@
 - name: Install Packages
   ansible.builtin.include_tasks: "{{ ansible_facts['os_family']|lower }}_packages.yaml"
 
-- name: Get HomeSetup
-  ansible.builtin.git:
-    repo: 'https://github.com/droopy4096/home_setup.git'
-    dest: ~/work/home_setup
-
-- name: Add homedir configs configs
-  ansible.builtin.file:
-    src: ~/work/home_setup/{{ item }}
-    dest: ~/{{ item }}
-    state: link
-  with_items:
-    - .zshrc
-    - .p10k.zsh
+- name: Install HomeSetup
+  ansible.builtin.import_tasks: home_setup.yaml
 
 - name: Get KubernetesTools
   ansible.builtin.git:
