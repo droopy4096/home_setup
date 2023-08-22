@@ -51,3 +51,12 @@ workstation_debian_packages:
 
 workstation_snaps:
   - acroreadrdc
+
+asdf_packages:
+  - lazygit
+  - jqp
+  - k9s
+  - kind
+  - stern
+  - yq
+  - kubectl

@@ -33,14 +33,7 @@
     ~/.asdf/bin/asdf global {{ item }} latest
   args: 
     creates: "~/.asdf/shims/{{ item }}"
-  with_items:
-    - lazygit
-    - jqp
-    - k9s
-    - kind
-    - stern
-    - yq
-    - kubectl
+  with_items: "{{ asdf_packages }}"
 
 - name: Install jless
   ansible.builtin.shell: |
