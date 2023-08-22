@@ -23,6 +23,7 @@
     create: true
     search_string: '. $HOME/.zshrc.asdf'
     line: '. $HOME/.zshrc.asdf'
+    insertafter: EOF
 
 
 - name: Install asdf packages

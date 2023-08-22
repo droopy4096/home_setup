@@ -1,7 +1,7 @@
 - name: Install Packages
   ansible.builtin.include_tasks: "{{ ansible_facts['os_family']|lower }}_packages.yaml"
 
-- name: Install HomeSetup
+- name: Home Dir Setup
   ansible.builtin.import_tasks: home_setup.yaml
 
 - name: Get KubernetesTools
@@ -9,6 +9,19 @@
     # repo: 'git@github.com:droopy4096/kubernetes-tools.git'
     repo: 'https://github.com/droopy4096/kubernetes-tools.git'
     dest: ~/work/kubernetes-tools
+
+- name: Setup KubernetesTools
+  ansible.builtin.file:
+    src: ~/work/kubernetes-tools/bin/{{ item }}
+    dest: ~/bin/{{ item }}
+  with_items:
+    - kcopy
+    - kctx
+    - kexec
+    - klogs
+    - kns 
+    - kpod
+    - ktools
 
 - name: Get Worktree Tools
   ansible.builtin.git:
