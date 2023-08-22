@@ -1,9 +1,6 @@
 - name: Install RedHat family Packages
   ansible.builtin.yum: 
-    name: "{{ item }}"
+    name: "{{ workstation_redhat_packages }}"
     state: latest
-  with_items:
-    - neovim-qt
-    - fontconfig
   become: true
 

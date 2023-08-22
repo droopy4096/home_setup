@@ -54,3 +54,7 @@ workspace_debian_packages:
   - zsh
   - zsh-autosuggestions
   - zsh-syntax-highlighting
+
+workstation_debian_packages:
+  - neovim-qt
+  - fontconfig
