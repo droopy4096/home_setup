@@ -1,2 +1,4 @@
 dependencies:
   - workspace
+  - nerdfonts
+  - vscode

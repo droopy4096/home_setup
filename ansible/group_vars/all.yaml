@@ -48,3 +48,6 @@ workspace_debian_packages:
 workstation_debian_packages:
   - neovim-qt
   - fontconfig
+
+workstation_snaps:
+  - acroreadrdc
