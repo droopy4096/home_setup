@@ -1,0 +1,13 @@
+lazivim_prerequisites_redhat:
+  - nodejs-npm
+  - ripgrep
+  - fd-find
+  - gcc-c++
+  - libstdc++
+
+lazyvim_prerequisites_debian:
+  - npm
+  - ripgrep
+  - fd-find
+  - g++
+  - libstdc++-10-dev

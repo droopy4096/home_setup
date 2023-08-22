@@ -1,0 +1,6 @@
+- name: Install Packages
+  ansible.builtin.dnf: 
+    name: "{{ lazyvim_prerequisites_redhat }}"
+    state: latest
+  become: true
+

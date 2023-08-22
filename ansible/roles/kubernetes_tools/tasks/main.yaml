@@ -1,0 +1,20 @@
+---
+- name: Get KubernetesTools
+  ansible.builtin.git:
+    # repo: 'git@github.com:droopy4096/kubernetes-tools.git'
+    repo: 'https://github.com/droopy4096/kubernetes-tools.git'
+    dest: ~/work/kubernetes-tools
+
+- name: Setup KubernetesTools
+  ansible.builtin.file:
+    src: ~/work/kubernetes-tools/bin/{{ item }}
+    dest: ~/bin/{{ item }}
+    state: link
+  with_items:
+    - kcopy
+    - kctx
+    - kexec
+    - klogs
+    - kns 
+    - kpod
+    - ktools

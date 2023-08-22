@@ -1,0 +1,6 @@
+- name: Install Debian Packages
+  ansible.builtin.apt: 
+    name: "{{ lazyvim_prerequisites_debian }}"
+    state: latest
+  become: true
+

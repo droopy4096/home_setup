@@ -2,6 +2,6 @@
 # localhost ansible_connection=local
 
 # dmakovey-arm-playground
-34.28.110.83 ansible_user=dmakovey
+35.222.186.65 ansible_user=dmakovey
 
 [workstations]

@@ -16,11 +16,6 @@ workspace_redhat_packages:
   - moby-engine
   # neovim-related:
   - neovim
-  - nodejs-npm
-  - ripgrep
-  - fd-find
-  - gcc-c++
-  - libstdc++
   # Zsh-related
   - zsh
   - zsh-autosuggestions
@@ -45,11 +40,6 @@ workspace_debian_packages:
   - docker.io
   # neovim-related:
   - neovim
-  - npm
-  - ripgrep
-  - fd-find
-  - g++
-  - libstdc++-10-dev
   # Zsh-related
   - zsh
   - zsh-autosuggestions
