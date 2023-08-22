@@ -11,6 +11,15 @@
 #     line: "source ${HOME}/powerlevel10k/powerlevel10k.zsh-theme"
 #     insertafter: EOF
 
+- name: Add zshrc.asdf to zsh
+  ansible.builtin.lineinfile:
+    path: ~/.zshrc.local
+    create: true
+    search_string: .zshrc.asdf
+    line: "source ${HOME}/.zshrc.asdf"
+    insertafter: EOF
+
+
 - name: Add zsh configs
   ansible.builtin.file:
     src: ~/work/home_setup/{{ item }}

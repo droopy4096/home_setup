@@ -39,6 +39,7 @@
     - kind
     - stern
     - yq
+    - kubectl
 
 - name: Install jless
   ansible.builtin.shell: |
