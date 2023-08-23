@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/sh -x
 
 INVENTORY=${INVENTORY:-"localhost,"}
-if [ "${INVENTORY_TYPE}" == "localhost," ]; then
+if [ "${INVENTORY}" == "localhost," ]; then
     CONNECTION_TYPE="-c local"
 fi
 ROLE=${1}

@@ -1,0 +1,6 @@
+- name: Install Packages
+  ansible.builtin.dnf: 
+    name: neovim
+    state: latest
+  become: true
+

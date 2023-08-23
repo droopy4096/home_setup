@@ -1,4 +1,4 @@
-lazivim_prerequisites_redhat:
+lazyvim_prerequisites_redhat:
   - nodejs-npm
   - ripgrep
   - fd-find
