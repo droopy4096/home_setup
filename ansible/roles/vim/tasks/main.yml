@@ -1,0 +1,10 @@
+---
+
+- name: Add vim configs
+  ansible.builtin.file:
+    src: ~/work/home_setup/{{ item }}
+    dest: ~/{{ item }}
+    state: link
+  with_items:
+    - .vimrc
+    - .vim

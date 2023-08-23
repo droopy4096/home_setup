@@ -1,7 +1,0 @@
----
-dependencies:
-  - base_packages
-  - home_setup
-  - asdf
-  - kubernetes_tools
-  - lazyvim

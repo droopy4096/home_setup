@@ -1,0 +1,17 @@
+---
+
+- name: Create .config
+  ansible.builtin.file:
+    path: ~/.config
+    state: directory
+
+- name: Add LXDE configs
+  ansible.builtin.file:
+    src: ~/work/home_setup/.config/{{ item }}
+    dest: ~/.config/{{ item }}
+    state: link
+  with_items:
+    - lxpanel
+    - lxsession
+    - lxterminal
+    - openbox
