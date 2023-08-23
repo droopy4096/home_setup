@@ -15,7 +15,16 @@
     - .kube_helper
     - .colors
     - .vimrc
+    - .vim
+    - .bash_autocompletions
+    - .bash_autoprompt
+    - .bash_autoprompt.local
     - .bash_colors
+    - .bash_git
+    - .bash_prompt
+    - .bashrc_screen
+    - .bash_root
+    - .bash_svn
 
 - name: add ${HOME}/bin dir
   ansible.builtin.file:
