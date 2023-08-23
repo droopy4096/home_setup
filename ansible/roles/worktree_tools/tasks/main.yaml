@@ -10,5 +10,5 @@
     path: ~/.zshrc.local
     create: true
     search_string: "work/worktree-tools"
-    line: . ${HOME}/work/worktree-tools/worktree.zsh
+    line: ". ${HOME}/work/worktree-tools/worktree.zsh"
     insertafter: EOF
