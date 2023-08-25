@@ -5,3 +5,4 @@ dependencies:
   - role: asdf
   - role: kubernetes_tools
   - role: lazyvim
+  - role: vim_config
