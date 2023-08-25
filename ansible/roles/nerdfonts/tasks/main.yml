@@ -15,6 +15,5 @@
     src:  ~/.local/share/fonts/SourceCodePro.zip
     dest: ~/.local/share/fonts/
     remote_src: yes
-
-- name: Activate fonts
-  ansible.builtin.shell: fc-cache ~/.local/share/fonts
+  notify: 
+    - Activate Nerdfonts
