@@ -1,0 +1,5 @@
+profile: production
+extra_vars:
+  apply_role: workstation
+skip_list:
+  - command-instead-of-shell
