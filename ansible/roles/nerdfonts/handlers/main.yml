@@ -1,3 +1,4 @@
-
 - name: Activate Nerdfonts
-  ansible.builtin.shell: fc-cache ~/.local/share/fonts
+  ansible.builtin.command: fc-cache ~/.local/share/fonts
+  register: fc_cache
+  changed_when: fc_cache.output != 0
