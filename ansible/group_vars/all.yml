@@ -24,6 +24,7 @@ workspace_redhat_packages:
 workstation_redhat_packages:
   - neovim-qt
   - fontconfig
+  - ipython
 
 workspace_debian_packages:
   - screen
@@ -48,6 +49,7 @@ workspace_debian_packages:
 workstation_debian_packages:
   - neovim-qt
   - fontconfig
+  - ipython
 
 workstation_snaps:
   - acroreadrdc
