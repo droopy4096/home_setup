@@ -9,6 +9,14 @@
   ansible.builtin.lineinfile:
     path: ~/.zshrc.local
     create: true
-    search_string: "work/worktree-tools"
+    search_string: ". ${HOME}/work/worktree-tools/worktree.zsh"
     line: ". ${HOME}/work/worktree-tools/worktree.zsh"
+    insertafter: EOF
+
+- name: Setup Worktree path
+  ansible.builtin.lineinfile:
+    path: ~/.zshrc.local
+    create: true
+    search_string: "add_to_path ${HOME}/work/worktree-tools/bin"
+    line: "add_to_path ${HOME}/work/worktree-tools/bin"
     insertafter: EOF

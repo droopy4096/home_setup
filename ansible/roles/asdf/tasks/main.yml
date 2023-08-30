@@ -45,3 +45,4 @@
   with_items:
     - jless
   ignore_errors: true
+  when: ansible_architecture == "x86_64"
