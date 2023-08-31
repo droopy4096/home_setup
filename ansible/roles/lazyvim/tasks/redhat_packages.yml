@@ -1,6 +1,16 @@
+- name: Get neovim version
+  ansible.builtin.command: rpm -q --qf '%{VERSION}' neovim
+  register: neovim_ver
+
+- name: Check neovim version
+  ansible.builtin.assert:
+    that:
+      - neovim_ver.stdout is version('0.8.0', '>=')
+    fail_msg: "NeoVim version is too low"
+    success_msg: "NeoVim version satisfies requirements"
+
 - name: Install Packages
   ansible.builtin.dnf: 
     name: "{{ lazyvim_prerequisites_redhat }}"
     state: latest
   become: true
-
