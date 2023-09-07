@@ -1,7 +1,19 @@
 - name: Install pre-requisites
-  ansible.builtin.include_tasks: "{{ ansible_facts['os_family']|lower }}_packages.yml"
+  ansible.builtin.include_tasks: "{{ ansible_facts['os_family'] | lower }}_packages.yml"
 
-- name: Install LazyVim
-  ansible.builtin.git:
-    repo: 'https://github.com/LazyVim/starter'
+# - name: Install LazyVim
+#   ansible.builtin.git:
+#     repo: 'https://github.com/LazyVim/starter'
+#     dest: ~/.config/nvim
+
+- name: Create ~/.config
+  ansible.builtin.file:
+    state: directory
+    dest: ~/.config
+    mode: '0755'
+
+- name: Configure NVim to use LazyVim
+  ansible.builtin.file:
+    state: link
+    src: ~/work/home_setup/.config/nvim
     dest: ~/.config/nvim
