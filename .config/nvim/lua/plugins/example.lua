@@ -10,6 +10,7 @@ if true then return {
       flavour = "mocha",
     }
   },
+  { "equalsraf/neovim-gui-shim"}, 
 } end
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
 --
