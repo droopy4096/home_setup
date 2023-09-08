@@ -1,7 +1,16 @@
 -- since this is just an example spec, don't actually load anything here and return an empty spec
 -- stylua: ignore
-if true then return {} end
+-- if true then return {} end
 
+if true then return {
+  { "catppuccin/nvim",
+    lazy = true,
+    name = "catppuccin",
+    opts = {
+      flavour = "mocha",
+    }
+  },
+} end
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
 --
 -- In your plugin files, you can:
@@ -16,7 +25,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox",
+      -- colorscheme = "gruvbox",
     },
   },
 
@@ -93,6 +102,7 @@ return {
       servers = {
         -- pyright will be automatically installed with mason and loaded with lspconfig
         pyright = {},
+        jsonls = {},
       },
     },
   },
@@ -209,6 +219,7 @@ return {
         "shfmt",
         "flake8",
       },
+      --DIMON automatic_installation = { exclude = { "jsonls" } },
     },
   },
 
