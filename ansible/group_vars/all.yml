@@ -20,6 +20,8 @@ workspace_redhat_packages:
   - zsh
   - zsh-autosuggestions
   - zsh-syntax-highlighting
+  - helm
+  - kubernetes-client
 
 workstation_redhat_packages:
   - neovim-qt
@@ -62,3 +64,4 @@ asdf_packages:
   - stern
   - yq
   - kubectl
+  - helm

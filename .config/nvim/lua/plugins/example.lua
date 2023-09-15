@@ -3,6 +3,11 @@
 -- if true then return {} end
 
 if true then return {
+  { "bluz71/vim-moonfly-colors" ,
+    name = "moonfly",
+    lazy = "false",
+    priority = 1000
+  },
   { "catppuccin/nvim",
     lazy = true,
     name = "catppuccin",
@@ -10,7 +15,29 @@ if true then return {
       flavour = "mocha",
     }
   },
-  { "equalsraf/neovim-gui-shim"}, 
+  { "equalsraf/neovim-gui-shim"},
+  {'akinsho/toggleterm.nvim', 
+    version = "*", 
+    config = true,
+    opts = {
+      open_mapping = [[<c-`>]]
+    }
+  },
+  { "delphinus/dwm.nvim",
+    enabled = false,
+    opts = {
+      key_maps = false,
+      master_pane_count =2,
+      master_pain_width = '60%',
+    }
+  },
+  {
+    "simrat39/symbols-outline.nvim",
+    cmd = "SymbolsOutline",
+    keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
+    config = true,
+  },
+
 } end
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
 --

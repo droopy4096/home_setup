@@ -5,3 +5,4 @@ require("catppuccin").setup({
     dark = "mocha",
   },
 })
+require("moonfly").setup()
