@@ -1,4 +1,0 @@
-  typeset -g POWERLEVEL9K_DIR_BACKGROUND=0                      # transparent background
-  typeset -g POWERLEVEL9K_VCS_BACKGROUND=0                      # transparent background
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_BACKGROUND=0                      # transparent background
-  typeset -g POWERLEVEL9K_BACKGROUND=017                         # transparent background
