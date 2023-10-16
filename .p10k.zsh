@@ -1540,7 +1540,10 @@
     local _context=${(V)KCTX}
     local _namespace=${(V)KNS}
     [[ -z "${(V)KCTX}" ]] && _context=$(kubectl config current-context 2>&/dev/null)
-    [[ -z "${(V)KNS}" ]] && _namespace="$(kubectl config view -o=jsonpath="{.contexts[?(@.name==\"${_context}\")].context.namespace}" 2>&/dev/null)"
+    if [[ -n "$_context" ]]; then
+       [[ -z "${(V)KNS}" ]] && _namespace="$(kubectl config view -o=jsonpath="{.contexts[?(@.name==\"${_context}\")].context.namespace}")"
+    fi
+
     _namespace=${(V)_namespace:-"default"}
     p10k segment -b 051 -f white -t "${(V)_context}/${(V)_namespace}"
   }
