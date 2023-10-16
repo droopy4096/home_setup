@@ -1,0 +1,46 @@
+- name: Get asdf
+  ansible.builtin.git:
+    repo: 'https://github.com/asdf-vm/asdf.git'
+    dest: ~/.asdf
+    version: v0.12.0
+
+- name: Install asdf for Bash
+  ansible.builtin.lineinfile:
+    path: ~/.bashrc
+    create: true
+    search_string: '. $HOME/.asdf.asdf.sh'
+    line: '. $HOME/.asdf/asdf.sh'
+
+- name: Install asdf for Zsh file
+  ansible.builtin.template: 
+    src: zshrc.asdf
+    dest: ~/.zshrc.asdf
+
+- name: Enable asdf in Zsh
+  ansible.builtin.lineinfile:
+    path: ~/.zshrc.local
+    create: true
+    search_string: '. $HOME/.zshrc.asdf'
+    line: '. $HOME/.zshrc.asdf'
+    insertafter: EOF
+
+- name: Install asdf packages
+  ansible.builtin.shell: |
+    ~/.asdf/bin/asdf plugin add {{ item }}
+    ~/.asdf/bin/asdf install {{ item }} latest
+    ~/.asdf/bin/asdf global {{ item }} latest
+  args: 
+    creates: "~/.asdf/shims/{{ item }}"
+  with_items: "{{ asdf_packages }}"
+
+- name: Install jless
+  ansible.builtin.shell: |
+    ~/.asdf/bin/asdf plugin add {{ item }}
+    ~/.asdf/bin/asdf install {{ item }} latest
+    ~/.asdf/bin/asdf global {{ item }} latest
+  args: 
+    creates: "~/.asdf/shims/{{ item }}"
+  with_items:
+    - jless
+  ignore_errors: true
+  when: ansible_architecture == "x86_64"

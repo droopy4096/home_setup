@@ -1,0 +1,7 @@
+- hosts: workspaces
+  roles:
+    - workspace
+
+- hosts: workstations
+  roles:
+    - workstation

@@ -1,0 +1,8 @@
+# 1. Install language and associated tooling
+# 2. Need to trigger IDE extensions install for each language selected (?)
+#    a. Can use the same `programming_languages` list for each IDE to install extensions: 
+#       * this way apply.sh on IDE installation will add extensions only if IDE is installed
+#       * can do host-variables to identify which hosts should install which languages
+- name: Activate languages
+  ansible.builtin.include_role: "{{ item }}"
+  with_items: "{{ programming_languages }}"

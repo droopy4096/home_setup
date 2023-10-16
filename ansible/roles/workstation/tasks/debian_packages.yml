@@ -1,0 +1,6 @@
+- name: Install Debian family Packages
+  ansible.builtin.apt: 
+    name: "{{ workstation_debian_packages }}"
+    state: latest
+  become: true
+

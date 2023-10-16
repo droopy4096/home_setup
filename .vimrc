@@ -35,6 +35,8 @@ set visualbell
 set number 
 set list
 
+command! -range JSONFormat <line1>,<line2>!python -m json.tool
+
 " open all windows side-by-side
 " since we use dwm plugin
 all

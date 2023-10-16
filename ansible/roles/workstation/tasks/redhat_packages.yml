@@ -1,0 +1,6 @@
+- name: Install RedHat family Packages
+  ansible.builtin.yum: 
+    name: "{{ workstation_redhat_packages }}"
+    state: latest
+  become: true
+

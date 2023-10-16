@@ -1,0 +1,17 @@
+- name: Get neovim version
+  ansible.builtin.command: dpkg-query --showformat='${Version}' --show neovim
+  register: neovim_ver
+
+- name: Check neovim version
+  ansible.builtin.assert:
+    that:
+      - neovim_ver.stdout is version('0.8.0', '>=')
+    fail_msg: "NeoVim version is too low"
+    success_msg: "NeoVim version satisfies requirements"
+
+- name: Install Debian Packages
+  ansible.builtin.apt:
+    name: "{{ lazyvim_prerequisites_debian }}"
+    state: latest
+  become: true
+

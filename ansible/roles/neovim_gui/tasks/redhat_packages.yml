@@ -1,0 +1,6 @@
+- name: Install Packages
+  ansible.builtin.dnf: 
+    name: neovim-qt
+    state: latest
+  become: true
+

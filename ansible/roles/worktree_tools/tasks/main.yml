@@ -1,0 +1,22 @@
+---
+
+- name: Get Worktree Tools
+  ansible.builtin.git:
+    repo: 'https://gitlab.com/dmakovey/worktree-tools.git'
+    dest: ~/work/worktree-tools
+
+- name: Setup Worktree Tools
+  ansible.builtin.lineinfile:
+    path: ~/.zshrc.local
+    create: true
+    search_string: ". ${HOME}/work/worktree-tools/worktree.zsh"
+    line: ". ${HOME}/work/worktree-tools/worktree.zsh"
+    insertafter: EOF
+
+- name: Setup Worktree path
+  ansible.builtin.lineinfile:
+    path: ~/.zshrc.local
+    create: true
+    search_string: "add_to_path ${HOME}/work/worktree-tools/bin"
+    line: "add_to_path ${HOME}/work/worktree-tools/bin"
+    insertafter: EOF

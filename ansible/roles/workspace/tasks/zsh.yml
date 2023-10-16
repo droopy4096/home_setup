@@ -1,0 +1,27 @@
+- name: Install p10k
+  ansible.builtin.git:
+    repo: 'https://github.com/romkatv/powerlevel10k.git'
+    dest: ~/powerlevel10k
+
+# - name: Add p10k to zsh
+#   ansible.builtin.lineinfile:
+#     path: ~/.zshrc
+#     create: true
+#     search_string: powerlevel10k
+#     line: "source ${HOME}/powerlevel10k/powerlevel10k.zsh-theme"
+#     insertafter: EOF
+
+- name: Add zsh configs
+  ansible.builtin.file:
+    src: ~/work/home_setup/{{ item }}
+    dest: ~/{{ item }}
+    state: link
+  with_items:
+    - .zshrc
+    - .p10k.zsh
+
+- name: Use zsh
+  become: yes
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    shell: /bin/zsh

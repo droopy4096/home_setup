@@ -1,0 +1,8 @@
+---
+dependencies:
+  - role: base_packages
+  - role: home_setup
+  - role: asdf
+  - role: kubernetes_tools
+  - role: lazyvim
+  - role: vim_config

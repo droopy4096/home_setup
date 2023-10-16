@@ -1,0 +1,6 @@
+- name: Install Debian Packages
+  ansible.builtin.apt: 
+    name: "{{ workspace_debian_packages }}"
+    state: latest
+  become: true
+

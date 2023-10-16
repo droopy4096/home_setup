@@ -1,0 +1,44 @@
+- name: Fetch HomeSetup
+  ansible.builtin.git:
+    repo: 'https://github.com/droopy4096/home_setup.git'
+    dest: ~/work/home_setup
+
+- name: Add homedir configs
+  ansible.builtin.file:
+    src: ~/work/home_setup/{{ item }}
+    dest: ~/{{ item }}
+    state: link
+  with_items:
+    - .zshrc
+    - .p10k.zsh
+    - .screenrc
+    - .kube_helper
+    - .colors
+    - .vimrc
+    - .vim
+    - .bash_autocompletions
+    - .bash_autoprompt
+    - .bash_autoprompt.local
+    - .bash_colors
+    - .bash_git
+    - .bash_prompt
+    - .bashrc_screen
+    - .bash_root
+    - .bash_svn
+
+- name: add ${HOME}/bin dir
+  ansible.builtin.file:
+    path: ~/bin
+    state: directory
+
+- name: Add homedir tools
+  ansible.builtin.file:
+    src: ~/work/home_setup/bin/{{ item }}
+    dest: ~/bin/{{ item }}
+    state: link
+  with_items:
+    - k
+    - h
+    - dyff-R
+    - my_ip
+

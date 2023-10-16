@@ -1,0 +1,6 @@
+- name: Install Packages
+  ansible.builtin.include_tasks: "{{ ansible_facts['os_family']|lower }}_packages.yaml"
+
+- name: Install Snaps
+  community.general.snap:
+    name: "{{ workstation_snaps }}"

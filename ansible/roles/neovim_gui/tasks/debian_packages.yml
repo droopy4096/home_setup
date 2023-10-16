@@ -1,0 +1,6 @@
+- name: Install Debian Packages
+  ansible.builtin.apt: 
+    name: neovim-qt
+    state: latest
+  become: true
+

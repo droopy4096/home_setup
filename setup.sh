@@ -30,9 +30,11 @@ link_file ${BASH_HOME}/.xpath.py
 link_file ${BASH_HOME}/.kube_helper
 link_file ${BASH_HOME}/.bash_autocompletions
 
-link_file ${BASH_HOME}/bin/k ${HOME}/bin
-link_file ${BASH_HOME}/bin/k9s ${HOME}/bin
-link_file ${BASH_HOME}/bin/h ${HOME}/bin
+for tool in dyff-R h k my_ip xdg-open-all
+do
+  link_file ${BASH_HOME}/bin/${tool} ${HOME}/bin/${tool}
+# link_file ${BASH_HOME}/bin/k9s ${HOME}/bin
+done
 
 bashrc_install .bash_autoprompt
 bashrc_install .bash_autocompletions

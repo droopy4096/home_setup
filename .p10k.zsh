@@ -28,6 +28,15 @@
   # Zsh >= 5.1 is required.
   autoload -Uz is-at-least && is-at-least 5.1 || return
 
+  # Prompt colors.
+  local grey='242'
+  local red='#FF5C57'
+  local yellow='#F3F99D'
+  local blue='#57C7FF'
+  local magenta='#FF6AC1'
+  local cyan='#9AEDFE'
+  local white='#F1F1F0'
+
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     time
@@ -1530,8 +1539,8 @@
     # source ${HOME}/.kube_helper
     local _context=${(V)KCTX}
     local _namespace=${(V)KNS}
-    [[ -z "${(V)KCTX}" ]] && _context=$(kubectl config current-context)
-    [[ -z "${(V)KNS}" ]] && _namespace="$(kubectl config view -o=jsonpath="{.contexts[?(@.name==\"${_context}\")].context.namespace}")"
+    [[ -z "${(V)KCTX}" ]] && _context=$(kubectl config current-context 2>&/dev/null)
+    [[ -z "${(V)KNS}" ]] && _namespace="$(kubectl config view -o=jsonpath="{.contexts[?(@.name==\"${_context}\")].context.namespace}" 2>&/dev/null)"
     _namespace=${(V)_namespace:-"default"}
     p10k segment -b 051 -f white -t "${(V)_context}/${(V)_namespace}"
   }
@@ -1580,6 +1589,7 @@
 
   # Emulate Transient Prompt:
   function p10k-on-pre-prompt() { 
+    mkdir -p ${HOME}/tmp
     LOG="${HOME}/tmp/p10k.log"
     echo -n "Pre-prompt: $(date)" >> ${LOG}
     if [[ "${TERM_PROGRAM}" = "vscode" ]] 

@@ -1,0 +1,6 @@
+- name: Install Packages
+  ansible.builtin.dnf: 
+    name: "{{ workspace_redhat_packages }}"
+    state: latest
+  become: true
+

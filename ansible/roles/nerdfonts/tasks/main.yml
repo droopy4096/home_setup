@@ -1,0 +1,19 @@
+# https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/SourceCodePro.zip
+
+- name: Create fonts directory
+  ansible.builtin.file:
+    path: ~/.local/share/fonts
+    state: directory
+
+- name: Fetch NerdFonts
+  ansible.builtin.get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/releases/download/v{{ nerd_fonts_version }}/SourceCodePro.zip
+    dest: ~/.local/share/fonts/SourceCodePro.zip
+
+- name: Unpack SourceCodePro fonts
+  ansible.builtin.unarchive:
+    src:  ~/.local/share/fonts/SourceCodePro.zip
+    dest: ~/.local/share/fonts/
+    remote_src: yes
+  notify: 
+    - Activate Nerdfonts
