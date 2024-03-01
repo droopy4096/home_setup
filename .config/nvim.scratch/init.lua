@@ -3,9 +3,10 @@ vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappin
 
 require("options")
 require("lazy-config")
-require "neo-tree-config"
+require("neo-tree-config")
 -- require "nvim-tree-config"
 require("lualine-config")
 require("telescope-config")
-require("whichkey")
+require("treesitter-config")
+require("whichkey-config")
 vim.cmd.colorscheme("moonfly")
