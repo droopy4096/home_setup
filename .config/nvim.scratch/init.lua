@@ -6,5 +6,6 @@ require("lazy-config")
 require "neo-tree-config"
 -- require "nvim-tree-config"
 require("lualine-config")
+require("telescope-config")
 require("whichkey")
 vim.cmd.colorscheme("moonfly")

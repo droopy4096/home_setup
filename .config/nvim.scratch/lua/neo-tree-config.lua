@@ -7,7 +7,7 @@ neo_tree = require("neo-tree")
 
 neo_tree.setup({
 	keys = {
-		{ "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
+		{ "<leader>e", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
 	},
 	config = function()
 		require("neo-tree").setup()
