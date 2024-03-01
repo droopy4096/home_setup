@@ -97,5 +97,32 @@ require('telescope').setup{
     --   extension_config_key = value,
     -- }
     -- please take a look at the readme of the extension you want to configure
-  }
+  },
+    opts = {
+      defaults = {
+        layout_strategy = "horizontal",
+        layout_config = { 
+          horizontal = {
+            prompt_position = "bottom", 
+            preview_width= 0.55, 
+            results_width = 0.8, 
+          },
+        },
+        sorting_strategy = "ascending",
+        winblend = 0,
+        vimgrep_arguments = {
+          'ag',
+          '--nocolor',
+          '--no-heading',
+          '--filename',
+          '--numbers',
+          '--column',
+          '--smart-case',
+          '--hidden' ,
+          '--ignore=.git/'
+        },
+        file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+        grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+      },
+    },
 }

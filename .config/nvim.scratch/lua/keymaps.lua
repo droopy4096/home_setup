@@ -1,0 +1,10 @@
+-- local gitlab = require("gitlab")
+-- 
+-- vim.keymap.set("n", "<leader>gln", gitlab.create_note, { desc = "GitLab MR: note" })
+-- vim.keymap.set("n", "<leader>gld", gitlab.toggle_discussions, { desc = "GitLab MR: toggle discussions" })
+-- vim.keymap.set("n", "<leader>glaa", gitlab.add_assignee, { desc = "GitLab MR: add assignee" })
+-- vim.keymap.set("n", "<leader>glad", gitlab.delete_assignee, { desc = "GitLab MR: delete assignee" })
+-- vim.keymap.set("n", "<leader>glra", gitlab.add_reviewer, { desc = "GitLab MR: add reviewer" })
+-- vim.keymap.set("n", "<leader>glrd", gitlab.delete_reviewer, { desc = "GitLab MR: delete reviewer" })
+-- vim.keymap.set("n", "<leader>glp", gitlab.pipeline, { desc = "GitLab MR: pipeline" })
+-- vim.keymap.set("n", "<leader>glo", gitlab.open_in_browser, { desc = "GitLab MR: open in browser" })
