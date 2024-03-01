@@ -33,3 +33,47 @@ end
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
+
+local wk = require("which-key")
+
+wk.register({
+  ["<leader>gl"] = {
+    name = "GitLab MR",
+  },
+  ["<leader>gS"] = {
+    name = "GitSigns",
+  },
+})
+
+local gitlab = require("gitlab")
+vim.keymap.set("n", "<leader>glrr", gitlab.review, { desc = "GitLab MR: review" })
+vim.keymap.set("n", "<leader>gls", gitlab.summary, { desc = "GitLab MR: summary" })
+vim.keymap.set("n", "<leader>glA", gitlab.approve, { desc = "GitLab MR: approve" })
+vim.keymap.set("n", "<leader>glR", gitlab.revoke, { desc = "GitLab MR: revoke" })
+vim.keymap.set("n", "<leader>glc", gitlab.create_comment, { desc = "GitLab MR: comment" })
+vim.keymap.set("v", "<leader>glc", gitlab.create_multiline_comment, { desc = "GitLab MR: multiline comment" })
+vim.keymap.set("v", "<leader>glC", gitlab.create_comment_suggestion, { desc = "GitLab MR: suggestion" })
+vim.keymap.set(
+  "n",
+  "<leader>glm",
+  gitlab.move_to_discussion_tree_from_diagnostic,
+  { desc = "GitLab MR: move to discussion tree from diagnostic" }
+)
+vim.keymap.set("n", "<leader>gln", gitlab.create_note, { desc = "GitLab MR: note" })
+vim.keymap.set("n", "<leader>gld", gitlab.toggle_discussions, { desc = "GitLab MR: toggle discussions" })
+vim.keymap.set("n", "<leader>glaa", gitlab.add_assignee, { desc = "GitLab MR: add assignee" })
+vim.keymap.set("n", "<leader>glad", gitlab.delete_assignee, { desc = "GitLab MR: delete assignee" })
+vim.keymap.set("n", "<leader>glra", gitlab.add_reviewer, { desc = "GitLab MR: add reviewer" })
+vim.keymap.set("n", "<leader>glrd", gitlab.delete_reviewer, { desc = "GitLab MR: delete reviewer" })
+vim.keymap.set("n", "<leader>glp", gitlab.pipeline, { desc = "GitLab MR: pipeline" })
+vim.keymap.set("n", "<leader>glo", gitlab.open_in_browser, { desc = "GitLab MR: open in browser" })
+
+local gitsigns = require("gitsigns")
+
+vim.keymap.set("n", "<leader>gSb", gitsigns.toggle_current_line_blame, { desc = "GitSigns: toggle line blame" })
+vim.keymap.set("n", "<leader>gSd", gitsigns.diffthis, { desc = "GitSigns: diff this" })
+vim.keymap.set("n", "<leader>gSD", gitsigns.toggle_deleted, { desc = "GitSigns: Toggle deleted lines" })
+vim.keymap.set("n", "<leader>gSsb", gitsigns.stage_buffer, { desc = "GitSigns: Toggle deleted lines" })
+
+local commander = require("commander")
+vim.keymap.set("n", "<leader>C", gitsigns.stage_buffer, { desc = "GitSigns: Toggle deleted lines" })

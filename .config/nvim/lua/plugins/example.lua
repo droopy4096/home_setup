@@ -3,6 +3,14 @@
 -- if true then return {} end
 
 if true then return {
+  { "FeiyouG/commander.nvim",
+    opts = {
+      integration = {
+        lazy = { enable = true }
+      }
+    }
+  },
+  { "lewis6991/gitsigns.nvim" },
   { "bluz71/vim-moonfly-colors" ,
     name = "moonfly",
     lazy = "false",
@@ -31,11 +39,74 @@ if true then return {
       master_pain_width = '60%',
     }
   },
+  { "harrisoncramer/gitlab.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "stevearc/dressing.nvim", -- Recommended but not required. Better UI for pickers.
+      enabled = true,
+    },
+    build = function () require("gitlab.server").build(true) end, -- Builds the Go binary
+    config = function()
+      require("gitlab").setup()
+    end,
+  },
   {
     "simrat39/symbols-outline.nvim",
     cmd = "SymbolsOutline",
     keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
     config = true,
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    keys = {
+      -- add a keymap to browse plugin files
+      -- stylua: ignore
+      {
+        "<leader>fp",
+        function() require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root }) end,
+        desc = "Find Plugin File",
+      },
+    },
+    -- change some options
+    opts = {
+      defaults = {
+        layout_strategy = "horizontal",
+        layout_config = { 
+          horizontal = {
+            prompt_position = "bottom", 
+            preview_width= 0.55, 
+            results_width = 0.8, 
+          },
+        },
+        sorting_strategy = "ascending",
+        winblend = 0,
+        -- vimgrep_arguments = {
+        --   'rg',
+        --   '--color=never',
+        --   '--no-heading',
+        --   '--with-filename',
+        --   '--line-number',
+        --   '--column',
+        --   '--smart-case',
+        --   '--hidden' -- thats the new thing
+        -- },
+        vimgrep_arguments = {
+          'ag',
+          '--nocolor',
+          '--no-heading',
+          '--filename',
+          '--numbers',
+          '--column',
+          '--smart-case',
+          '--hidden' ,
+          '--ignore=.git/'
+        },
+        file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+        grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+      },
+    },
   },
 
 } end
@@ -131,6 +202,33 @@ return {
         -- pyright will be automatically installed with mason and loaded with lspconfig
         pyright = {},
         jsonls = {},
+        ruff_lsp = {
+          keys = {
+            {
+              "<leader>co",
+              function()
+                vim.lsp.buf.code_action({
+                  apply = true,
+                  context = {
+                    only = { "source.organizeImports" },
+                    diagnostics = {},
+                  },
+                })
+              end,
+              desc = "Organize Imports",
+            },
+          },
+        },
+        setup = {
+          ruff_lsp = function()
+            require("lazyvim.util").lsp.on_attach(function(client, _)
+              if client.name == "ruff_lsp" then
+                -- Disable hover in favor of Pyright
+                client.server_capabilities.hoverProvider = false
+              end
+            end)
+          end,
+        },
       },
     },
   },

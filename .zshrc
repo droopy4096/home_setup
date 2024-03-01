@@ -46,16 +46,25 @@ setopt HIST_IGNORE_ALL_DUPS
 
 # autoload -U colors
 #colors
-if [ -r ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme ] ; then
-  source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
-fi
+#XXX if [ -r ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme ] ; then
+#XXX   source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
+#XXX fi
 
+#XXX #============ Starship block =========
+#XXX eval "$(starship init zsh)"
+#XXX export TRANSIENT=1
+#XXX #=====================================
+
+#======= Powerlevel10k Block =========
+#
 if [ -r ~/powerlevel10k/powerlevel10k.zsh-theme ] ; then
   source ~/powerlevel10k/powerlevel10k.zsh-theme
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#
+#=====================================
 
 eval $(keychain -q --eval --inherit any)
 

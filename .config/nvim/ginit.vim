@@ -28,4 +28,9 @@ inoremap <silent><RightMouse> <Esc>:call GuiShowContextMenu()<CR>
 xnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>gv
 snoremap <silent><RightMouse> <C-G>:call GuiShowContextMenu()<CR>gv
 
+set tabstop=2
+set expandtab
+set softtabstop=2
+set shiftwidth=2
+
 " "colorscheme catppuccin-mocha
