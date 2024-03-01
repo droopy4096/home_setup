@@ -3,6 +3,7 @@ local opt = vim.opt
 
 opt.autowrite = true -- Enable auto write
 
+-- This slows down startup significantly
 -- opt.clipboard = "unnamedplus" -- Sync with system clipboard
 
 opt.completeopt = "menu,menuone,noselect"
