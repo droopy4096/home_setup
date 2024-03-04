@@ -1159,6 +1159,21 @@
   function prompt_example() {
     p10k segment -f 208 -i '⭐' -t 'hello, %n'
   }
+
+  function prompt_ktools() {
+    # source ${HOME}/.kube_helper
+    local _context=${(V)KCTX}
+    local _namespace=${(V)KNS}
+    [[ -z "${(V)KCTX}" ]] && _context=$(kubectl config current-context 2>&/dev/null)
+    if [[ -n "$_context" ]]; then
+       [[ -z "${(V)KNS}" ]] && _namespace="$(kubectl config view -o=jsonpath="{.contexts[?(@.name==\"${_context}\")].context.namespace}")"
+    fi
+
+    _namespace=${(V)_namespace:-"default"}
+    p10k segment -b 051 -f white -t "${(V)_context}/${(V)_namespace}"
+  }
+
+
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
   # is to generate the prompt segment for display in instant prompt. See
   # https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt.
@@ -1262,6 +1277,7 @@
   # If p10k is already loaded, reload configuration.
   # This works even with POWERLEVEL9K_DISABLE_HOT_RELOAD=true.
   (( ! $+functions[p10k] )) || p10k reload
+  [ -r "${HOME}/.p10k.local" ] && source ${HOME}/.p10k.local
 }
 
 # Tell `p10k configure` which file it should overwrite.
