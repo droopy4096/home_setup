@@ -3,3 +3,6 @@
 -- Add any additional options here
 
 -- vim.cmd.colorscheme("catppuccin")
+vim.opt.title = true
+vim.opt.titlelen = 0 -- do not shorten title
+vim.opt.titlestring = 'nvim %{expand("%:p")}'
