@@ -3,111 +3,6 @@
 -- if true then return {} end
 
 if true then return {
-  { "FeiyouG/commander.nvim",
-    opts = {
-      integration = {
-        lazy = { enable = true }
-      }
-    }
-  },
-  { "lewis6991/gitsigns.nvim" },
-  { "bluz71/vim-moonfly-colors" ,
-    name = "moonfly",
-    lazy = "false",
-    priority = 1000
-  },
-  { "catppuccin/nvim",
-    lazy = true,
-    name = "catppuccin",
-    opts = {
-      flavour = "mocha",
-    }
-  },
-  { "equalsraf/neovim-gui-shim"},
-  {'akinsho/toggleterm.nvim', 
-    version = "*", 
-    config = true,
-    opts = {
-      open_mapping = [[<c-`>]]
-    }
-  },
-  { "delphinus/dwm.nvim",
-    enabled = false,
-    opts = {
-      key_maps = false,
-      master_pane_count =2,
-      master_pain_width = '60%',
-    }
-  },
-  { "harrisoncramer/gitlab.nvim",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
-      "stevearc/dressing.nvim", -- Recommended but not required. Better UI for pickers.
-      enabled = true,
-    },
-    build = function () require("gitlab.server").build(true) end, -- Builds the Go binary
-    config = function()
-      require("gitlab").setup()
-    end,
-  },
-  {
-    "simrat39/symbols-outline.nvim",
-    cmd = "SymbolsOutline",
-    keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
-    config = true,
-  },
-  {
-    "nvim-telescope/telescope.nvim",
-    keys = {
-      -- add a keymap to browse plugin files
-      -- stylua: ignore
-      {
-        "<leader>fp",
-        function() require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root }) end,
-        desc = "Find Plugin File",
-      },
-    },
-    -- change some options
-    opts = {
-      defaults = {
-        layout_strategy = "horizontal",
-        layout_config = { 
-          horizontal = {
-            prompt_position = "bottom", 
-            preview_width= 0.55, 
-            results_width = 0.8, 
-          },
-        },
-        sorting_strategy = "ascending",
-        winblend = 0,
-        -- vimgrep_arguments = {
-        --   'rg',
-        --   '--color=never',
-        --   '--no-heading',
-        --   '--with-filename',
-        --   '--line-number',
-        --   '--column',
-        --   '--smart-case',
-        --   '--hidden' -- thats the new thing
-        -- },
-        vimgrep_arguments = {
-          'ag',
-          '--nocolor',
-          '--no-heading',
-          '--filename',
-          '--numbers',
-          '--column',
-          '--smart-case',
-          '--hidden' ,
-          '--ignore=.git/'
-        },
-        file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-        grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-      },
-    },
-  },
 
 } end
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
@@ -233,6 +128,108 @@ return {
     },
   },
 
+  -- Golang setup
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        gopls = {
+          keys = {
+            -- Workaround for the lack of a DAP strategy in neotest-go: https://github.com/nvim-neotest/neotest-go/issues/12
+            { "<leader>td", "<cmd>lua require('dap-go').debug_test()<CR>", desc = "Debug Nearest (Go)" },
+          },
+          settings = {
+            gopls = {
+              gofumpt = true,
+              codelenses = {
+                gc_details = false,
+                generate = true,
+                regenerate_cgo = true,
+                run_govulncheck = true,
+                test = true,
+                tidy = true,
+                upgrade_dependency = true,
+                vendor = true,
+              },
+              hints = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = true,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+              },
+              analyses = {
+                fieldalignment = true,
+                nilness = true,
+                unusedparams = true,
+                unusedwrite = true,
+                useany = true,
+              },
+              usePlaceholders = true,
+              completeUnimported = true,
+              staticcheck = true,
+              directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+              semanticTokens = true,
+            },
+          },
+        },
+      },
+      setup = {
+        gopls = function(_, opts)
+          -- workaround for gopls not supporting semanticTokensProvider
+          -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
+          LazyVim.lsp.on_attach(function(client, _)
+            if client.name == "gopls" then
+              if not client.server_capabilities.semanticTokensProvider then
+                local semantic = client.config.capabilities.textDocument.semanticTokens
+                client.server_capabilities.semanticTokensProvider = {
+                  full = true,
+                  legend = {
+                    tokenTypes = semantic.tokenTypes,
+                    tokenModifiers = semantic.tokenModifiers,
+                  },
+                  range = true,
+                }
+              end
+            end
+          end)
+          -- end workaround
+        end,
+      },
+    },
+  },
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "goimports", "gofumpt" })
+    end,
+  },
+  {
+    "nvimtools/none-ls.nvim",
+    optional = true,
+    dependencies = {
+      {
+        "williamboman/mason.nvim",
+        opts = function(_, opts)
+          opts.ensure_installed = opts.ensure_installed or {}
+          vim.list_extend(opts.ensure_installed, { "gomodifytags", "impl" })
+        end,
+      },
+    },
+    opts = function(_, opts)
+      local nls = require("null-ls")
+      opts.sources = vim.list_extend(opts.sources or {}, {
+        nls.builtins.code_actions.gomodifytags,
+        nls.builtins.code_actions.impl,
+        nls.builtins.formatting.goimports,
+        nls.builtins.formatting.gofumpt,
+      })
+    end,
+  },
+
   -- add tsserver and setup with typescript.nvim instead of lspconfig
   {
     "neovim/nvim-lspconfig",
@@ -291,6 +288,10 @@ return {
         "typescript",
         "vim",
         "yaml",
+        "go",
+        "gomod",
+        "gowork",
+        "gosum",
       },
     },
   },
