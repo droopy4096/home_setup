@@ -2,6 +2,7 @@ local LazyVim = require("lazyvim.util")
 return {
   -- Golang setup
   {
+    -- from http://www.lazyvim.org/extras/lang/go
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
