@@ -1,0 +1,4 @@
+#!/bin/sh
+diff -u <(git rev-list --first-parent ${1:-$(git branch --show-current)}) \
+             <(git rev-list --first-parent ${2:-master}) | \
+     sed -ne 's/^ //p' | head -1
