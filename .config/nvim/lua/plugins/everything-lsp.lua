@@ -1,11 +1,74 @@
+-- from http://www.lazyvim.org/extras/lang/go
+
 local LazyVim = require("lazyvim.util")
 return {
   -- Golang setup
   {
-    -- from http://www.lazyvim.org/extras/lang/go
     "neovim/nvim-lspconfig",
     opts = {
+      autoformat = false,
       servers = {
+        yamlls = {
+          capabilities = {
+            textDocument = {
+              foldingRange = {
+                dynamicRegistration = false,
+                lineFoldingOnly = true,
+              },
+            },
+          },
+          on_new_config = function(new_config)
+            new_config.settings.yaml.schemas = vim.tbl_deep_extend(
+              "force",
+              new_config.settings.yaml.schemas or {},
+              require("schemastore").yaml.schemas()
+            )
+          end,
+          settings = {
+            redhat = { telemetry = { enabled = false } },
+            yaml = {
+              keyOrdering = false,
+              format = {
+                enable = true,
+              },
+              validate = true,
+              schemaStore = {
+                -- Must disable built-in schemaStore support to use
+                -- schemas from SchemaStore.nvim plugin
+                enable = false,
+                -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                url = "",
+              },
+            },
+          },
+        },
+        -- Python:
+        pyright = {
+          enabled = false,
+        },
+        basedpyright = {
+          enabled = true,
+        },
+        ruff_lsp = {
+          keys = {
+            {
+              "<leader>co",
+              function()
+                vim.lsp.buf.code_action({
+                  apply = true,
+                  context = {
+                    only = { "source.organizeImports" },
+                    diagnostics = {},
+                  },
+                })
+              end,
+              desc = "Organize Imports",
+            },
+          },
+        },
+        -- Ruby:
+        solargraph = {},
+        -- Golang:
         gopls = {
           keys = {
             -- Workaround for the lack of a DAP strategy in neotest-go: https://github.com/nvim-neotest/neotest-go/issues/12
@@ -50,6 +113,32 @@ return {
         },
       },
       setup = {
+        -- YAML:
+        yamlls = function()
+          -- Neovim < 0.10 does not have dynamic registration for formatting
+          if vim.fn.has("nvim-0.10") == 0 then
+            LazyVim.lsp.on_attach(function(client, _)
+              if client.name == "yamlls" then
+                client.server_capabilities.documentFormattingProvider = true
+              end
+            end)
+          end
+        end,
+        -- Python:
+        -- Cannot access configuration for basedpyright. Ensure this server is listed in `server_configurations.md` or added as a custom server.
+        -- basedpyright = function()
+        --   local lspconfig = require("lspconfig")
+        --   lspconfig.basedpyright.setup({})
+        -- end,
+        ruff_lsp = function()
+          LazyVim.lsp.on_attach(function(client, _)
+            if client.name == "ruff_lsp" then
+              -- Disable hover in favor of Pyright
+              client.server_capabilities.hoverProvider = false
+            end
+          end)
+        end,
+        -- Golang:
         gopls = function(_, opts)
           -- workaround for gopls not supporting semanticTokensProvider
           -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
@@ -77,7 +166,13 @@ return {
     "williamboman/mason.nvim",
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, { "goimports", "gofumpt" })
+      vim.list_extend(opts.ensure_installed, {
+        -- Golang:
+        "goimports",
+        "gofumpt",
+        -- Ruby:
+        "solargraph",
+      })
     end,
   },
   {

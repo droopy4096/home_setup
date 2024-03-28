@@ -9,3 +9,14 @@ vim.api.nvim_create_autocmd("FileType", {
     set foldexpr=nvim_treesitter#foldexpr()
   ]],
 })
+
+-- LSP Bash:
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "sh",
+  callback = function()
+    vim.lsp.start({
+      name = "bash-language-server",
+      cmd = { "bash-language-server", "start" },
+    })
+  end,
+})
