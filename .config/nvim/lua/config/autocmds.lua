@@ -20,3 +20,31 @@ vim.api.nvim_create_autocmd("FileType", {
     })
   end,
 })
+
+local bufferline = require("bufferline")
+bufferline.setup({
+  options = {
+    mode = "buffers",
+    style_preset = bufferline.style_preset.minimal,
+    indicator = { style = "underline" },
+    diagnostics = "nvim_lsp",
+    show_tab_indicators = true,
+    show_duplicate_prefix = true,
+    offsets = {
+      {
+        filetype = "neo-tree",
+        text = "Navigation",
+        text_align = "center",
+        separator = true,
+      },
+      {
+        filetype = "DiffviewFiles",
+        text = "MR review",
+        text_align = "center",
+        separator = true,
+      }
+    },
+    always_show_bufferline=true,
+    enforce_regular_tabs=true,
+  },
+})

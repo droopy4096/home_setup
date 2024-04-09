@@ -19,6 +19,7 @@ vim.keymap.set("n", "<leader>ff", tscope.find_files, { desc = "Telescope: Find F
 vim.keymap.set("n", "<leader>fg", tscope.live_grep, { desc = "Telescope: live grep" })
 vim.keymap.set("n", "<leader>fb", tscope.buffers, { desc = "Telescope: buffers" })
 vim.keymap.set("n", "<leader>fh", tscope.help_tags, { desc = "Telescope: help tags" })
+vim.keymap.set("n", "<leader>cg", tscope.treesitter, { desc = "GoTo definition (treesitter)" })
 
 function _G.set_terminal_keymaps()
   local opts = { buffer = 0 }

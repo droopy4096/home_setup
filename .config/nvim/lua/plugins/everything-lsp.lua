@@ -6,7 +6,8 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
-      autoformat = false,
+      -- autoformat now is under vim.g.autoformat
+      -- autoformat = false,
       servers = {
         yamlls = {
           capabilities = {
