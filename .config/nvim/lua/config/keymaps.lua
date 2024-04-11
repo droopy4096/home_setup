@@ -14,6 +14,8 @@
 -- -- vim.keymap.set("n", "<C-q>", dwm.rotateLeft)
 -- -- vim.keymap.set("n", "<C-s>", dwm.rotate)
 
+vim.keymap.set("n", "<leader>cR", vim.lsp.buf.references, {desc = "List references"})
+
 local tscope = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", tscope.find_files, { desc = "Telescope: Find Files" })
 vim.keymap.set("n", "<leader>fg", tscope.live_grep, { desc = "Telescope: live grep" })
@@ -43,6 +45,9 @@ wk.register({
   },
   ["<leader>gS"] = {
     name = "GitSigns",
+  },
+  ["<leader>m"] = {
+    name = "Bookmarks",
   },
 })
 

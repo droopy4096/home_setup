@@ -2,7 +2,8 @@
 nerd_fonts_version: 3.0.2
 
 workspace_redhat_packages: 
-  - screen
+  - tmux
+  - tmux-powerline
   - keychain
   - git
   - jq
