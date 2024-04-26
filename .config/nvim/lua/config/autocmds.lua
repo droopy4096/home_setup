@@ -24,7 +24,8 @@ vim.api.nvim_create_autocmd("FileType", {
 local bufferline = require("bufferline")
 bufferline.setup({
   options = {
-    mode = "buffers",
+    -- mode = "buffers",
+    mode = "tabs",
     style_preset = bufferline.style_preset.minimal,
     indicator = { style = "underline" },
     diagnostics = "nvim_lsp",
@@ -48,3 +49,4 @@ bufferline.setup({
     enforce_regular_tabs=true,
   },
 })
+
