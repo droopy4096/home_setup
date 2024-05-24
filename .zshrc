@@ -78,6 +78,12 @@ add_to_path ${HOME}/work/kubernetes-tools/bin
 add_to_path ${HOME}/bin/adr-tools/src
 add_to_path ${HOME}/.local/bin
 
+insert_path(){
+  local new_path=$1
+  echo ${PATH} | grep -qF ${new_path} || export PATH=${new_path}:${PATH}
+}
+
+
 if [ -r ${HOME}/.kube/config ]; then
   export KUBECONFIG=$HOME/.kube/config
 fi
