@@ -14,10 +14,13 @@
 -- -- vim.keymap.set("n", "<C-q>", dwm.rotateLeft)
 -- -- vim.keymap.set("n", "<C-s>", dwm.rotate)
 
+vim.keymap.set("n", "<leader>cR", vim.lsp.buf.references, {desc = "List references"})
+
 local tscope = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", tscope.find_files, { desc = "Telescope: Find Files" })
 vim.keymap.set("n", "<leader>fg", tscope.live_grep, { desc = "Telescope: live grep" })
 vim.keymap.set("n", "<leader>fb", tscope.buffers, { desc = "Telescope: buffers" })
+vim.keymap.set("n", "<leader>bL", tscope.buffers, { desc = "Telescope: buffers" })
 vim.keymap.set("n", "<leader>fh", tscope.help_tags, { desc = "Telescope: help tags" })
 vim.keymap.set("n", "<leader>cg", tscope.treesitter, { desc = "GoTo definition (treesitter)" })
 
@@ -32,17 +35,37 @@ function _G.set_terminal_keymaps()
   vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
 end
 
+vim.keymap.set("n", "<leader>fPr", [[<Cmd>let @+ = expand("%")<CR>]], {desc = "Copy file relative path"})
+vim.keymap.set("n", "<leader>fPf", [[<Cmd>let @+ = expand("%:p")<CR>]], {desc = "Copy file full path"})
+vim.keymap.set("n", "<leader>fPn", [[<Cmd>let @+ = expand("%:t")<CR>]], {desc = "Copy file name"})
+vim.keymap.set("n", "<leader>fPd", [[<Cmd>let @+ = expand("%:p:h")<CR>]], {desc = "Copy directory name"})
+
+vim.keymap.set("n", "<C-`>", [[<Cmd>ToggleTerm<CR>]])
+vim.keymap.set("n", "<leader>wt", [[<Cmd>ToggleTerm<CR>]], { desc = "Terminal"})
+
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
 
+vim.keymap.set("n", "<leader>dt", [[<Cmd>diffthis<CR>]], {desc = "Toggle diff"})
+
 local wk = require("which-key")
+
 
 wk.register({
   ["<leader>gl"] = {
     name = "GitLab MR",
   },
+  ["<leader>d"] = {
+    name = "Diff",
+  },
+  ["<leader>fP"] = {
+    name = "File Path",
+  },
   ["<leader>gS"] = {
     name = "GitSigns",
+  },
+  ["<leader>m"] = {
+    name = "Bookmarks",
   },
 })
 

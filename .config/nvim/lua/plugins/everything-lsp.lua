@@ -49,6 +49,11 @@ return {
         },
         basedpyright = {
           enabled = true,
+          settings = {
+            basedpyright = {
+              typeCheckingMode = "standard",
+            },
+          },
         },
         ruff_lsp = {
           keys = {
