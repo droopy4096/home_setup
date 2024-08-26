@@ -1,0 +1,38 @@
+
+## amd64
+# apt update -y && apt install -y gpg sudo wget curl
+# sudo install -dm 755 /etc/apt/keyrings
+# wget -qO - https://mise.jdx.dev/gpg-key.pub | gpg --dearmor | sudo tee /etc/apt/keyrings/mise-archive-keyring.gpg 1> /dev/null
+#
+
+- name: Add mise Apt signing key
+  apt_key:
+    url: https://mise.jdx.dev/gpg-key.pub 
+    state: present
+    keyring: /etc/apt/trusted.gpg.d/mise.gpg
+  become: true
+
+# echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main" | sudo tee /etc/apt/sources.list.d/mise.list
+- name: add Mise repo (amd64)
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/trusted.gpg.d/mise.gpg arch=amd64] https://mise.jdx.dev/deb stable main"
+    state: present
+    filename: mise
+  become: true
+  when: ansible_architecture == "x86_64"
+
+- name: add Mise repo (arm64)
+  apt_repository:
+    repo: "deb [signed-by=/etc/apt/trusted.gpg.d/mise.gpg arch=arm64] https://mise.jdx.dev/deb stable main"
+    state: present
+    filename: mise
+  become: true
+  when: ansible_architecture == "aarch64"
+ 
+# sudo apt install -y mise
+- name: add mise
+  apt:
+    name: mise
+    state: latest
+  become: true
+

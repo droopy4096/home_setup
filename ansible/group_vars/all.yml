@@ -19,6 +19,7 @@ workspace_redhat_packages:
   - skopeo
   - buildah
   - moby-engine
+  - docker-compose
   # neovim-related:
   - neovim
   # Zsh-related
@@ -26,7 +27,9 @@ workspace_redhat_packages:
   - zsh-autosuggestions
   - zsh-syntax-highlighting
   - helm
-  - kubernetes-client
+  - python-pip
+  - gpg
+  - sudo
 
 workstation_redhat_packages:
   - neovim-qt
@@ -54,6 +57,10 @@ workspace_debian_packages:
   - zsh
   - zsh-autosuggestions
   - zsh-syntax-highlighting
+  - python3-pip
+  - docker-compose
+  - gpg
+  - sudo
 
 workstation_debian_packages:
   - neovim-qt

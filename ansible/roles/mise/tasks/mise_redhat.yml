@@ -1,0 +1,21 @@
+
+# dnf install -y dnf-plugins-core
+- name: install dnf-plugins-core
+  dnf:
+    name: dnf-plugins-core
+    state: latest
+  become: true
+ 
+# dnf config-manager --add-repo https://mise.jdx.dev/rpm/mise.repo
+- name: add mise repo
+  shell:
+    cmd: dnf config-manager --add-repo https://mise.jdx.dev/rpm/mise.repo
+    creates: /etc/yum.repos.d/mise.repo
+
+# dnf install -y mise
+- name: install mise
+  dnf:
+    name: mise
+    state: latest
+  become: true
+
