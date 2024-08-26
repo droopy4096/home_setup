@@ -3,6 +3,8 @@ nerd_fonts_version: 3.0.2
 
 buildx_release: 0.16.2
 
+glab_version: 1.45.0
+
 workspace_redhat_packages: 
   - tmux
   - tmux-powerline

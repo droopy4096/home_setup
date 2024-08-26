@@ -1,0 +1,5 @@
+# Install one of the packages from
+# https://gitlab.com/gitlab-org/cli/-/releases
+
+- name: Install glab Package
+  ansible.builtin.include_tasks: "glab_{{ ansible_facts['os_family']|lower }}.yml"
