@@ -101,6 +101,12 @@ alias ll="exa -l --git"
 alias yaml-diff dyff
 alias diff-yaml dyff
 alias xmc="xterm -fa 'Liberation Mono' -fs 10 -e mc"
+alias urldecode='python3 -c "import sys, urllib.parse as ul; \
+    print(ul.unquote_plus(sys.argv[1]))"'
+
+alias urlencode='python3 -c "import sys, urllib.parse as ul; \
+    print (ul.quote_plus(sys.argv[1]))"'
+
 
 gctx(){
   local cmd=${1:-list}
