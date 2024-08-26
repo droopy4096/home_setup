@@ -1,0 +1,21 @@
+
+# - name: Get latest release of buildx
+#   github_release:
+#     user: docker
+#     repo: buildx
+#     action: latest_release
+#   register: buildx_gh
+
+- name: create buildx plugin directory
+  shell:
+    cmd: mkdir -p $HOME/.docker/cli-plugins
+    creates: $HOME/.docker/cli-plugins
+
+# https://github.com/docker/buildx/releases/download/v0.16.2/buildx-v0.16.2.linux-amd64
+- name: fetch latest buildx (amd64)
+  ansible.builtin.get_url:
+    url: https://github.com/docker/buildx/releases/download/v{{ buildx_release }}/buildx-v{{ buildx_release }}.linux-amd64
+    dest: $HOME/.docker/cli-plugins/docker-buildx
+    mode: '0755'
+  when: ansible_architecture == "x86_64"
+

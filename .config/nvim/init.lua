@@ -20,6 +20,10 @@ vim.api.nvim_create_user_command("JSONFormat", "<line1>,<line2>!python -m json.t
   range = true,
 })
 
+vim.api.nvim_create_user_command('MDTableFormat', "<line1>,<line2>!column -t -s '|' -o '|'", {
+  range = true,
+})
+
 local o = vim.o
 o.tabstop = 2
 o.expandtab = true

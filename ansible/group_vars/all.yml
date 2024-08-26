@@ -1,6 +1,8 @@
   
 nerd_fonts_version: 3.0.2
 
+buildx_release: 0.16.2
+
 workspace_redhat_packages: 
   - tmux
   - tmux-powerline
@@ -30,7 +32,9 @@ workstation_redhat_packages:
   - ipython
 
 workspace_debian_packages:
-  - screen
+  - tmux
+  - tmux-themepack-jimeh
+  - powerline 
   - keychain
   - git
   - jq
@@ -64,5 +68,5 @@ asdf_packages:
   - kind
   - stern
   - yq
-  - kubectl
+  # - kubectl
   - helm
