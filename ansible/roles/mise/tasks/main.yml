@@ -1,3 +1,17 @@
 
 - name: Install Mise Packages
   ansible.builtin.include_tasks: "mise_{{ ansible_facts['os_family']|lower }}.yml"
+
+- name: Install asdf packages
+  ansible.builtin.shell: |
+    mise install {{ item }}
+  args: 
+    creates: "~/.local/share/mise/shims/{{ item }}"
+  with_items: "{{ asdf_packages }}"
+
+- name: Install jless
+  ansible.builtin.shell: |
+    mise install jless
+  args: 
+    creates: "~/.local/share/mise/shims/jless"
+

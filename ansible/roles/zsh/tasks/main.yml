@@ -1,0 +1,11 @@
+
+- name: Fetch Powerlevel10k
+  ansible.builtin.git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: ~/powerlevel10k
+
+- name: change shell
+  user:
+    name: "{{ ansible_user }}"
+    shell: /usr/bin/zsh
+  become: true

@@ -2,9 +2,12 @@
 dependencies:
   - role: base_packages
   - role: home_setup
-  - role: asdf
+  - role: zsh
+  # - role: asdf
+  - role: mise
   - role: kubernetes_tools
   - role: lazyvim
   - role: vim_config
   - role: worktree_tools
+  - role: docker
   - role: buildx
