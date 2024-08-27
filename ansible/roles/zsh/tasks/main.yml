@@ -4,8 +4,16 @@
     repo: https://github.com/romkatv/powerlevel10k.git
     dest: ~/powerlevel10k
 
+- name: add localised configuration for powerlevel10k
+  template:
+    src: p10k.local 
+    dst: ~/.p10k.local 
+    mode: 0644
+
 - name: change shell
   user:
     name: "{{ ansible_user }}"
     shell: /usr/bin/zsh
   become: true
+
+
