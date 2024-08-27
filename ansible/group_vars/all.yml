@@ -5,6 +5,10 @@ buildx_release: 0.16.2
 
 glab_version: 1.45.0
 
+p10k_prompt_bg: "017"
+
+debian_release_name: "bookworm"
+
 workspace_redhat_packages: 
   - tmux
   - tmux-powerline
