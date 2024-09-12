@@ -1,3 +1,17 @@
+- name: Add Debian Backports repo
+  apt_repository:
+    repo: "deb https://deb.debian.org/debian {{ debian_release_name }}-backports main"
+    state: present
+    filename: backports
+  become: true
+
+- name: Make backports the default
+  template:
+    src: default_backports.j2
+    dest: /etc/apt/apt.conf.d/01default_backports
+    mode: "0644"
+  become: true
+
 - name: Install Debian Packages
   ansible.builtin.apt: 
     name: "{{ workspace_debian_packages }}"

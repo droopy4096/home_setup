@@ -3,5 +3,9 @@
 
 # dmakovey-arm-playground
 35.222.186.65 ansible_user=dmakovey
+# dmakovey-workspace-ubnt2204
+35.203.86.110 ansible_user=dmakovey
+# workstation-deb
+34.44.72.10 ansible_user=dmakovey p10k_prompt_bg=017
 
 [workstations]

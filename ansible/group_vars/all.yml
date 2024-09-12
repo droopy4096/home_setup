@@ -10,6 +10,8 @@ p10k_prompt_bg: "017"
 android_vendors:
   - "18d1"
 
+debian_release_name: "bookworm"
+
 workspace_redhat_packages: 
   - tmux
   - tmux-powerline
@@ -35,6 +37,7 @@ workspace_redhat_packages:
   - python-pip
   - gpg
   - sudo
+  - bat
 
 workstation_redhat_packages:
   - neovim-qt
@@ -66,6 +69,7 @@ workspace_debian_packages:
   - docker-compose
   - gpg
   - sudo
+  - bat
 
 workstation_debian_packages:
   - neovim-qt
