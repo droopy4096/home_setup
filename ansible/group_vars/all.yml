@@ -7,6 +7,9 @@ glab_version: 1.45.0
 
 p10k_prompt_bg: "017"
 
+android_vendors:
+  - "18d1"
+
 workspace_redhat_packages: 
   - tmux
   - tmux-powerline

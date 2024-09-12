@@ -1,0 +1,10 @@
+- name: Add udev rules
+  lineinfile:
+    path: /etc/udev/rules.d/51-android.rules
+    search_string: SUBSYSTEM=="usb", ATTR{idVendor}=="{{ item }}"
+    create: true
+    line: >
+      SUBSYSTEM=="usb", ATTR{idVendor}=="{{ item }}", TAG+="systemd", ENV{SYSTEMD_WANTS}="adb.service", GROUP="plugdev"
+  with_items: "{{ android_vendors }}"
+  become: true
+  notify: reload udev

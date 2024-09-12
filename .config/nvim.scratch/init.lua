@@ -9,10 +9,8 @@ require("lualine-config")
 require("telescope-config")
 require("treesitter-config")
 require("whichkey-config")
-require("bufferline-config")
-require("gitsigns-config")
-if vim.env.GITLAB_TOKEN ~= nil then
-    require("gitlab-config")
-end
+-- Missing packages???
+-- require("bufferline-config")
+-- require("gitsigns-config")
 vim.cmd.colorscheme("moonfly")
 require("keymaps")
