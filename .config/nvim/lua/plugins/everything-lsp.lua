@@ -9,6 +9,7 @@ return {
       -- autoformat now is under vim.g.autoformat
       -- autoformat = false,
       servers = {
+        lemminx = {},
         yamlls = {
           capabilities = {
             textDocument = {

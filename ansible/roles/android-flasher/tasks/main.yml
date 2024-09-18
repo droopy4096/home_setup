@@ -8,3 +8,10 @@
   with_items: "{{ android_vendors }}"
   become: true
   notify: reload udev
+
+- name: Add user to plugdev group 
+  ansible.builtin.user:
+    name: "{{ ansible_env.SUDO_USER }}"
+    groups: plugdev
+    append: yes
+  become: true

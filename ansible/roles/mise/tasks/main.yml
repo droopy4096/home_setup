@@ -5,13 +5,21 @@
 - name: Install asdf packages
   ansible.builtin.shell: |
     mise install {{ item }}
+    mise use -g {{ item }}@latest
   args: 
     creates: "~/.local/share/mise/shims/{{ item }}"
   with_items: "{{ asdf_packages }}"
 
+- name: install lemminx
+  ansible.builtin.shell: |
+    mise plugin add  lemminx https://github.com/droopy4096/asdf-lemminx.git
+    mise install lemminx
+    mise use -g lemminx@latest
+
 - name: Install jless
   ansible.builtin.shell: |
     mise install jless
+    mise use -g jless@latest
   args: 
     creates: "~/.local/share/mise/shims/jless"
 
