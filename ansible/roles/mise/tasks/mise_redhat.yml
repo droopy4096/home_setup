@@ -11,6 +11,7 @@
   shell:
     cmd: dnf config-manager --add-repo https://mise.jdx.dev/rpm/mise.repo
     creates: /etc/yum.repos.d/mise.repo
+  become: true
 
 # dnf install -y mise
 - name: install mise
