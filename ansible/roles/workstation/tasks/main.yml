@@ -1,5 +1,5 @@
 - name: Install Packages
-  ansible.builtin.include_tasks: "{{ ansible_facts['os_family']|lower }}_packages.yaml"
+  ansible.builtin.include_tasks: "{{ ansible_facts['os_family']|lower }}_packages.yml"
 
 - name: Install Snaps
   community.general.snap:
