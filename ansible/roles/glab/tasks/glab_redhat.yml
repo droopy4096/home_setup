@@ -2,3 +2,5 @@
   dnf:
     name: "https://gitlab.com/gitlab-org/cli/-/releases/v{{ glab_version }}/downloads/glab_{{ glab_version }}_Linux_{{ ansible_architecture }}.rpm"
     state: present
+    disable_gpg_check: true
+  become: true

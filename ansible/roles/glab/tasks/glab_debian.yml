@@ -1,4 +1,5 @@
 - name: Install a .deb package from the internet.
   apt:
     deb: "https://gitlab.com/gitlab-org/cli/-/releases/v{{ glab_version }}/downloads/glab_{{ glab_version }}_Linux_{{ ansible_architecture }}.deb"
+  become: true
 
