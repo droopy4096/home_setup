@@ -57,3 +57,11 @@
     insertafter: EOF
   when: 'ansible_os_family == "Debian"'
 
+- name: Add exa alias
+  ansible.builtin.lineinfile:
+    path: ~/.zshrc.local
+    create: true
+    search_string: "alias ll="
+    line: "alias ll='exa -l --git'"
+    insertafter: EOF
+
