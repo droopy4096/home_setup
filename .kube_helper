@@ -7,7 +7,7 @@ NAMESPACE_OPT=${NAMESPACE_OPT:-"--namespace"}
 if [ -n "${KCTX}" ] 
 then
   CONTEXT="${CONTEXT_OPT}=${KCTX}"
-  config=$(kubectl config view | yq -y ".contexts[] | select(.name==\"${KCTX}\")")
+  config=$(kubectl config view | yq -o y ".contexts[] | select(.name==\"${KCTX}\")")
   cluster=$(echo "${config}" | yq -r '.context.cluster') 
   [ -t 1 ] && \
    /bin/echo -e "${Dark_Gray}Setting context${RESET}: ${Light_Green}${KCTX}${RESET} in ${Light_Blue}${cluster}${RESET} cluster"
@@ -27,7 +27,7 @@ then
    /bin/echo -e "${Dark_Gray}Setting namespace${RESET}: ${Yellow}${KNS}${RESET}"
 else
   [ -z "${config}" -a -n "${context_name}" ] && config=$(kubectl config view --minify)
-  [ -z "${context_name}" ] && config=$(kubectl config view  | yq -r "{contexts: [.contexts[]  | select(.name==\"${KCTX}\")]}")
+  [ -z "${context_name}" ] && config=$(kubectl config view  | yq -r "{\"contexts\": [.contexts[]  | select(.name==\"${KCTX}\")]}")
   namespace=$(echo "${config}" | yq -r '.contexts| .[]| .context.namespace')
   [ -t 1 ] && \
    /bin/echo -e "${Dark_Gray}Default namespace${RESET}: ${Brown}${namespace}${RESET}"

@@ -38,6 +38,7 @@ workspace_redhat_packages:
   - gpg
   - sudo
   - bat
+  - exa
 
 workstation_redhat_packages:
   - neovim-qt
@@ -70,6 +71,7 @@ workspace_debian_packages:
   - gpg
   - sudo
   - bat
+  - exa
 
 workstation_debian_packages:
   - neovim-qt
