@@ -51,23 +51,14 @@ vim.keymap.set("n", "<leader>dt", [[<Cmd>diffthis<CR>]], {desc = "Toggle diff"})
 local wk = require("which-key")
 
 
-wk.register({
-  ["<leader>gl"] = {
-    name = "GitLab MR",
-  },
-  ["<leader>d"] = {
-    name = "Diff",
-  },
-  ["<leader>fP"] = {
-    name = "File Path",
-  },
-  ["<leader>gS"] = {
-    name = "GitSigns",
-  },
-  ["<leader>m"] = {
-    name = "Bookmarks",
-  },
+wk.add({
+  {"<leader>gl", group = "GitLab MR" },
+  {"<leader>d", group = "Diff" },
+  {"<leader>fP", group = "File Path" },
+  {"<leader>gS", group = "GitSigns" },
+  {"<leader>m", group = "Bookmarks" },
 })
+
 
 if vim.env.GITLAB_TOKEN ~= nil then
   local gitlab = require("gitlab")
@@ -125,3 +116,10 @@ end)
 vim.keymap.set("n", "gR", function()
   require("trouble").toggle("lsp_references")
 end)
+
+vim.keymap.set(
+    {'n', 'v', 's', 'x', 'o', 'i', 'l', 'c', 't'},
+    '<C-v>',
+    function() vim.api.nvim_paste(vim.fn.getreg('+'), true, -1) end,
+    { noremap = true, silent = true }
+)

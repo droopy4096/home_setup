@@ -5,7 +5,11 @@
 -- vim.cmd.colorscheme("catppuccin")
 vim.opt.title = true
 vim.opt.titlelen = 0 -- do not shorten title
+-- :help titlestring
+-- :help statusline
+-- :help expand
 vim.opt.titlestring = 'nvim %{expand("%:p")}'
+-- vim.opt.titlestring = 'nvim %f'
 
 vim.g.autoformat = false
 
