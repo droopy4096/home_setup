@@ -118,6 +118,7 @@ return {
             },
           },
         },
+        dockerls = { },
       },
       setup = {
         -- YAML:
@@ -179,6 +180,10 @@ return {
         "gofumpt",
         -- Ruby:
         "solargraph",
+        -- Helm
+        "helm-ls",
+        -- dockerls
+        "dockerfile-language-server",
       })
     end,
   },
@@ -217,4 +222,5 @@ return {
       })
     end,
   },
+  
 }
