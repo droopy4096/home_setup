@@ -57,6 +57,7 @@ wk.add({
   {"<leader>fP", group = "File Path" },
   {"<leader>gS", group = "GitSigns" },
   {"<leader>m", group = "Bookmarks" },
+  {"<leader>gw", group = "Git Worktrees" },
 })
 
 
