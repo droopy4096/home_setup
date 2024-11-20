@@ -24,6 +24,8 @@ vim.keymap.set("n", "<leader>bL", tscope.buffers, { desc = "Telescope: buffers" 
 vim.keymap.set("n", "<leader>fh", tscope.help_tags, { desc = "Telescope: help tags" })
 vim.keymap.set("n", "<leader>cg", tscope.treesitter, { desc = "GoTo definition (treesitter)" })
 
+vim.keymap.set("n", "<leader>ct", tscope.tagstack, { desc = "Telescope: Tag stack" })
+
 function _G.set_terminal_keymaps()
   local opts = { buffer = 0 }
   vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)

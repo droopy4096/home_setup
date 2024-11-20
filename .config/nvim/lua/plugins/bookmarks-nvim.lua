@@ -5,6 +5,12 @@ return {
     require("bookmarks").setup{
       -- sign_priority = 8,  --set bookmark sign priority to cover other sign
       save_file = vim.fn.expand("$HOME/.bookmarks.nvim"), -- bookmarks save file path
+      -- save_file = function()
+      --   local project_dir = vim.fn.finddir(".git", ".;");
+      --   local project_elements=vim.fn.split(project_dir, "/")
+      --   local path_elements=table.unpack(project_elements, 0, vim.fn.len(project_elements) - 1 )
+      --   return vim.fn.join(path_elements,"/")
+      -- end,
       keywords = {
         ["@t"] = "☑️ ", -- mark annotation startswith @t ,signs this icon as `Todo`
         ["@w"] = "⚠️ ", -- mark annotation startswith @w ,signs this icon as `Warn`
