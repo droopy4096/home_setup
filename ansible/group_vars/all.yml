@@ -112,3 +112,4 @@ asdf_packages:
   - yq
   # - kubectl
   - helm
+  - glow
