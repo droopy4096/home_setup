@@ -23,6 +23,7 @@ return {
         "spectre_panel",
         "toggleterm",
         "qf",
+        "outline",
       },
     })
   end,
