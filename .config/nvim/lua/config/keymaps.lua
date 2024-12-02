@@ -19,7 +19,11 @@ vim.keymap.set("n", "<leader>cR", vim.lsp.buf.references, {desc = "List referenc
 local tscope = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", tscope.find_files, { desc = "Telescope: Find Files" })
 vim.keymap.set("n", "<leader>fg", tscope.live_grep, { desc = "Telescope: live grep" })
-vim.keymap.set("n", "<leader>fb", tscope.buffers, { desc = "Telescope: buffers" })
+-- vim.keymap.set("n", "<leader>fb", tscope.buffers, { desc = "Telescope: buffers" })
+vim.keymap.set("n", "<space>fb", ":Telescope file_browser<CR>")
+-- open file_browser with the path of the current buffer
+vim.keymap.set("n", "<space>fB", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
+
 vim.keymap.set("n", "<leader>bL", tscope.buffers, { desc = "Telescope: buffers" })
 vim.keymap.set("n", "<leader>fh", tscope.help_tags, { desc = "Telescope: help tags" })
 vim.keymap.set("n", "<leader>cg", tscope.treesitter, { desc = "GoTo definition (treesitter)" })
@@ -120,9 +124,12 @@ vim.keymap.set("n", "gR", function()
   require("trouble").toggle("lsp_references")
 end)
 
-vim.keymap.set(
-    {'n', 'v', 's', 'x', 'o', 'i', 'l', 'c', 't'},
-    '<C-v>',
-    function() vim.api.nvim_paste(vim.fn.getreg('+'), true, -1) end,
-    { noremap = true, silent = true }
-)
+-- vim.keymap.set(
+--     {'n', 'v', 's', 'x', 'o', 'i', 'l', 'c', 't'},
+--     '<C-v>',
+--     function() vim.api.nvim_paste(vim.fn.getreg('+'), true, -1) end,
+--     { noremap = true, silent = true }
+-- )
+
+vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, { desc = "Code Help" })
+
