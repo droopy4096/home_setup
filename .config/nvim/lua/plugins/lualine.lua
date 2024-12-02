@@ -14,6 +14,7 @@ return {
       -- remove redundant filename info 
       -- FIXME: 
       -- opts.sections.lualine_c = { git_root }
-      opts.inactive_sections.lualine_c = {}
+      opts.sections.lualine_c = {}
+      -- opts.inactive_sections.lualine_c = {}
     end,
   }
