@@ -45,7 +45,7 @@ bufferline.setup({
         separator = true,
       }
     },
-    always_show_bufferline=true,
+    always_show_bufferline=false,
     enforce_regular_tabs=true,
   },
 })
@@ -62,3 +62,12 @@ lspconfig.helm_ls.setup {
     }
   }
 }
+
+local winbar=require('winbar')
+winbar.setup({
+  enabled = true,
+  show_file_path=false,
+  exclude_filetype= {
+    'neo-tree',
+  }
+})
