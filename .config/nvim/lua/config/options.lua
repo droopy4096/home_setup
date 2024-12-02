@@ -13,4 +13,4 @@ vim.opt.titlestring = 'nvim %{expand("%:p")}'
 
 vim.g.autoformat = false
 
-vim.g.winbar="%f"
+-- vim.g.winbar="%f"

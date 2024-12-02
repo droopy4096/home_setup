@@ -63,11 +63,3 @@ lspconfig.helm_ls.setup {
   }
 }
 
-local winbar=require('winbar')
-winbar.setup({
-  enabled = true,
-  show_file_path=false,
-  exclude_filetype= {
-    'neo-tree',
-  }
-})
