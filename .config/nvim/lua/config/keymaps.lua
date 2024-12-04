@@ -58,7 +58,6 @@ local wk = require("which-key")
 
 
 wk.add({
-  {"<leader>gl", group = "GitLab MR" },
   {"<leader>d", group = "Diff" },
   {"<leader>fP", group = "File Path" },
   {"<leader>gS", group = "GitSigns" },
@@ -67,8 +66,13 @@ wk.add({
 })
 
 
-if vim.env.GITLAB_TOKEN ~= nil then
+
+-- if vim.env.GITLAB_TOKEN ~= nil and vim.GITLAB_TOKEN ~= "" then
+if vim.env.GITLAB_TOKEN ~= nil and vim.env.GITLAB_TOKEN ~= "" then
   local gitlab = require("gitlab")
+  wk.add({
+    {"<leader>gl", group = "GitLab MR" },
+  })
   vim.keymap.set("n", "<leader>glrr", gitlab.review, { desc = "GitLab MR: review" })
   vim.keymap.set("n", "<leader>gls", gitlab.summary, { desc = "GitLab MR: summary" })
   vim.keymap.set("n", "<leader>glA", gitlab.approve, { desc = "GitLab MR: approve" })
