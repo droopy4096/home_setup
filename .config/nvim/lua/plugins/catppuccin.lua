@@ -9,7 +9,7 @@ return {
       highlight_overrides = {
         all = function(C)
           return {
-            -- fix visal selection within illuminated words not visible enough
+            -- fix visual selection within illuminated words not visible enough
             IlluminatedWordText = { bg = C.surface1 },
             IlluminatedWordRead = { bg = C.surface1 },
             IlluminatedWordWrite = { bg = C.surface1 },

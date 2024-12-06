@@ -137,3 +137,5 @@ end)
 
 vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, { desc = "Code Help" })
 
+-- vim.keymap.set("n", "<leader>T", [[<Cmd> !cd "%h" && konsole &<CR>]], { desc = "Terminal: External" })
+vim.keymap.set("n", "<leader>T", ":!konsole --workdir=%:h &<CR>", { desc = "Terminal: External" })
