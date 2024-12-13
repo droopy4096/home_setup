@@ -26,12 +26,24 @@
     state: reloaded
   when: killing_disabled.changed or login_section_added.changed
 
+- name: Add tmux server configuration directory
+  ansible.builtin.file:
+    path: ~/.config/tmux
+    state: directory
+    mode: "0750"
+
 - name: Add tmux server configuration
   ansible.builtin.template:
     src: tmux-server.conf.j2
     dest: ~/.config/tmux/server.conf
     mode: "0640"
   register: tmux_configuration
+
+- name: Add system user service directory
+  ansible.builtin.file:
+    path: ~/.config/systemd/user
+    state: directory
+    mode: "0750"
 
 - name: Add user service for tmux
   ansible.builtin.template:
