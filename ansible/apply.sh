@@ -10,4 +10,4 @@ fi
 ROLE=${1}
 shift
 
-ansible-playbook -i ${INVENTORY} ${LIMIT_HOST} ${CONNECTION_TYPE} -e "apply_role=${ROLE}" $@ apply.yml
+ansible-playbook -i ${INVENTORY} ${LIMIT_HOST} ${CONNECTION_TYPE} -K -e "apply_role=${ROLE}" $@ apply.yml
