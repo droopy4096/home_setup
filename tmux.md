@@ -2,7 +2,7 @@
 
 ## Persistence
 
-`sustemd` by default is configured to killing *all* user processes upon log out, including background running `tmux` or `screen`. To get back old behaviour several things need to be fixed.
+`systemd` by default is configured to killing *all* user processes upon log out, including background running `tmux` or `screen`. To get back old behaviour several things need to be fixed.
 
 ### /etc/systemd/logind.conf
 
