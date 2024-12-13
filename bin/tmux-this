@@ -2,7 +2,7 @@
 
 SESSION_NAME=${1:?"Session name was not provided"}
 shift
-_commands=(new-session -d -s "${SESSION_NAME}")
+_commands=(new-session-attach -s "${SESSION_NAME}")
 _new_command=""
 
 if [ "$#" -lt 1 ]; then
