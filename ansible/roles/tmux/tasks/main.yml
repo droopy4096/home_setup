@@ -1,49 +1,53 @@
 - name: Make sure Login section exists in logind.conf
   become: true
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/systemd/logind.conf
     create: true
     regexp: '^\[Login\]'
     line: "[Login]"
+    mode: "0644"
   register: login_section_added
 
 - name: Disable process killing for user
   become: true
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/systemd/logind.conf
     create: true
     regexp: '^KillUserExcludeUsers=$'
     # FIXME: we discard all other users here, really
     line: "KillExcludeUsers=root {{ ansible_user_id }}"
+    mode: "0644"
   register: killing_disabled
 
-- name: restart logind if needed
+- name: Restart logind if needed
   become: true
-  systemd_service:
+  ansible.builtin.systemd_service:
     name: systemd-logind
     state: reloaded
   when: killing_disabled.changed or login_section_added.changed
 
 - name: Add tmux server configuration
-  template:
+  ansible.builtin.template:
     src: tmux-server.conf.j2
     dest: ~/.config/tmux/server.conf
+    mode: "0640"
   register: tmux_configuration
 
 - name: Add user service for tmux
-  template: 
+  ansible.builtin.template:
     src: tmux-server.service.j2
     dest: ~/.config/systemd/user/tmux-server.service
+    mode: "0640"
   register: service_configuration
 
 - name: Start user tmux service
-  systemd_service:
+  ansible.builtin.systemd_service:
     scope: user
     state: '{{ "re" if service_configuration.changed or tmux_configuration.changed }}started'
     enabled: true
     name: tmux-server
 
 - name: Enable process lingering
-  shell:
+  ansible.builtin.shell:
     cmd: loginctl enable-linger
     creates: "/var/lib/systemd/linger/{{ ansible_user_id }}"
