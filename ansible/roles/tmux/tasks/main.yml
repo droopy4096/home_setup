@@ -1,0 +1,49 @@
+- name: Make sure Login section exists in logind.conf
+  become: true
+  lineinfile:
+    path: /etc/systemd/logind.conf
+    create: true
+    regexp: '^\[Login\]'
+    line: "[Login]"
+  register: login_section_added
+
+- name: Disable process killing for user
+  become: true
+  lineinfile:
+    path: /etc/systemd/logind.conf
+    create: true
+    regexp: '^KillUserExcludeUsers=$'
+    # FIXME: we discard all other users here, really
+    line: "KillExcludeUsers=root {{ ansible_user_id }}"
+  register: killing_disabled
+
+- name: restart logind if needed
+  become: true
+  systemd_service:
+    name: systemd-logind
+    state: reloaded
+  when: killing_disabled.changed or login_section_added.changed
+
+- name: Add tmux server configuration
+  template:
+    src: tmux-server.conf.j2
+    dest: ~/.config/tmux/server.conf
+  register: tmux_configuration
+
+- name: Add user service for tmux
+  template: 
+    src: tmux-server.service.j2
+    dest: ~/.config/systemd/user/tmux-server.service
+  register: service_configuration
+
+- name: Start user tmux service
+  systemd_service:
+    scope: user
+    state: '{{ "re" if service_configuration.changed or tmux_configuration.changed }}started'
+    enabled: true
+    name: tmux-server
+
+- name: Enable process lingering
+  shell:
+    cmd: loginctl enable-linger
+    creates: "/var/lib/systemd/linger/{{ ansible_user_id }}"
