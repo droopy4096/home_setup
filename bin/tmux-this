@@ -1,0 +1,20 @@
+#!/bin/bash
+
+SESSION_NAME=${1:?"Session name was not provided"}
+shift
+_commands=(new-session -A -s "${SESSION_NAME}")
+_new_command=""
+
+if [ "$#" -lt 1 ]; then
+  _commands+=(-c "${PWD}" -n shell ";")
+else
+  for d in "$@"
+  do 
+    _dir=${d%%:*}
+    _title=${d##*:}
+    _commands+=(${_new_command} -c "${_dir}" -n "${_title}" ";" )
+    _new_command="new-window"
+  done
+fi
+
+tmux "${_commands[@]}"

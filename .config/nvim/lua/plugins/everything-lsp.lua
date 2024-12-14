@@ -119,6 +119,7 @@ return {
           },
         },
         dockerls = { },
+        ansiblels = { },
       },
       setup = {
         -- YAML:
@@ -184,6 +185,7 @@ return {
         "helm-ls",
         -- dockerls
         "dockerfile-language-server",
+        "ansible-language-server",
       })
     end,
   },
@@ -222,5 +224,8 @@ return {
       })
     end,
   },
+  {
+    "mfussenegger/nvim-ansible",
+  }
   
 }

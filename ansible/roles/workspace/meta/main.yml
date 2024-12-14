@@ -11,3 +11,4 @@ dependencies:
   - role: worktree_tools
   - role: docker
   - role: buildx
+  - role: tmux

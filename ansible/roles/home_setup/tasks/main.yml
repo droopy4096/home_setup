@@ -4,12 +4,14 @@
     dest: ~/work/home_setup
 
 - name: Create bat config dir
-  shell:
+  ansible.builtin.shell:
     cmd: mkdir -p ~/.config/bat
+    creates: ~/.config/bat
 
 - name: Create eza config dir
-  shell:
+  ansible.builtin.shell:
     cmd: mkdir -p ~/.config/eza
+    creates: ~/.config/eza
 
 - name: Add homedir configs
   ansible.builtin.file:
@@ -18,10 +20,11 @@
     state: link
   with_items: "{{ homedir_configs }}"
 
-- name: add ${HOME}/bin dir
+- name: Add ${HOME}/bin dir
   ansible.builtin.file:
     path: ~/bin
     state: directory
+    mode: "0750"
 
 - name: Add homedir tools
   ansible.builtin.file:
@@ -41,6 +44,7 @@
     search_string: "alias bat=batcat"
     line: "alias bat=batcat"
     insertafter: EOF
+    mode: "0640"
   when: 'ansible_os_family == "Debian"'
 
 - name: Add exa alias
@@ -50,4 +54,5 @@
     search_string: "alias ll="
     line: "alias ll='exa -l --git'"
     insertafter: EOF
+    mode: "0640"
 

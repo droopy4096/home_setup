@@ -19,7 +19,11 @@ vim.keymap.set("n", "<leader>cR", vim.lsp.buf.references, {desc = "List referenc
 local tscope = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", tscope.find_files, { desc = "Telescope: Find Files" })
 vim.keymap.set("n", "<leader>fg", tscope.live_grep, { desc = "Telescope: live grep" })
-vim.keymap.set("n", "<leader>fb", tscope.buffers, { desc = "Telescope: buffers" })
+-- vim.keymap.set("n", "<leader>fb", tscope.buffers, { desc = "Telescope: buffers" })
+vim.keymap.set("n", "<space>fb", ":Telescope file_browser<CR>")
+-- open file_browser with the path of the current buffer
+vim.keymap.set("n", "<space>fB", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
+
 vim.keymap.set("n", "<leader>bL", tscope.buffers, { desc = "Telescope: buffers" })
 vim.keymap.set("n", "<leader>fh", tscope.help_tags, { desc = "Telescope: help tags" })
 vim.keymap.set("n", "<leader>cg", tscope.treesitter, { desc = "GoTo definition (treesitter)" })
@@ -54,7 +58,6 @@ local wk = require("which-key")
 
 
 wk.add({
-  {"<leader>gl", group = "GitLab MR" },
   {"<leader>d", group = "Diff" },
   {"<leader>fP", group = "File Path" },
   {"<leader>gS", group = "GitSigns" },
@@ -63,8 +66,13 @@ wk.add({
 })
 
 
-if vim.env.GITLAB_TOKEN ~= nil then
+
+-- if vim.env.GITLAB_TOKEN ~= nil and vim.GITLAB_TOKEN ~= "" then
+if vim.env.GITLAB_TOKEN ~= nil and vim.env.GITLAB_TOKEN ~= "" then
   local gitlab = require("gitlab")
+  wk.add({
+    {"<leader>gl", group = "GitLab MR" },
+  })
   vim.keymap.set("n", "<leader>glrr", gitlab.review, { desc = "GitLab MR: review" })
   vim.keymap.set("n", "<leader>gls", gitlab.summary, { desc = "GitLab MR: summary" })
   vim.keymap.set("n", "<leader>glA", gitlab.approve, { desc = "GitLab MR: approve" })
@@ -120,9 +128,14 @@ vim.keymap.set("n", "gR", function()
   require("trouble").toggle("lsp_references")
 end)
 
-vim.keymap.set(
-    {'n', 'v', 's', 'x', 'o', 'i', 'l', 'c', 't'},
-    '<C-v>',
-    function() vim.api.nvim_paste(vim.fn.getreg('+'), true, -1) end,
-    { noremap = true, silent = true }
-)
+-- vim.keymap.set(
+--     {'n', 'v', 's', 'x', 'o', 'i', 'l', 'c', 't'},
+--     '<C-v>',
+--     function() vim.api.nvim_paste(vim.fn.getreg('+'), true, -1) end,
+--     { noremap = true, silent = true }
+-- )
+
+vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, { desc = "Code Help" })
+
+-- vim.keymap.set("n", "<leader>T", [[<Cmd> !cd "%h" && konsole &<CR>]], { desc = "Terminal: External" })
+vim.keymap.set("n", "<leader>T", ":!konsole --workdir=%:h &<CR>", { desc = "Terminal: External" })
