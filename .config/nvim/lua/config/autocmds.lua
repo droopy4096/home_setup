@@ -63,3 +63,8 @@ lspconfig.helm_ls.setup {
   }
 }
 
+local wk=require('which-key')
+wk.setup({
+  -- use classic layout - horizontal at the bottom
+  preset = "classic",
+})
