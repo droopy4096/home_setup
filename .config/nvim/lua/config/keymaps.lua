@@ -138,4 +138,15 @@ end)
 vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, { desc = "Code Help" })
 
 -- vim.keymap.set("n", "<leader>T", [[<Cmd> !cd "%h" && konsole &<CR>]], { desc = "Terminal: External" })
-vim.keymap.set("n", "<leader>T", ":!konsole --workdir=%:h &<CR>", { desc = "Terminal: External" })
+wk.add({
+  {"<leader>T", group = "External terminals" },
+})
+vim.keymap.set("n", "<leader>Tk", ":!konsole --workdir=%:h &<CR>", { desc = "Terminal: External" })
+
+if vim.env.TMUX ~= nil then
+  wk.add({
+    {"<leader>Tm", group = "Tmux controls" },
+  })
+  vim.keymap.set("n", "<leader>Tm-", ":!tmux split-window -c %:h -v -l 15<CR>", { desc = "Tmux horizontal split" })
+  vim.keymap.set("n", "<leader>Tm|", ":!tmux split-window -c %:h -h<CR>", { desc = "Tmux vertical split" })
+end
