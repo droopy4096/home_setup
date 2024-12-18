@@ -1,2 +1,7 @@
 - name: Install pre-requisites
   ansible.builtin.include_tasks: "{{ ansible_facts['os_family']|lower }}_packages.yml"
+
+- name: Install Ansible-Lint
+  ansible.builtin.pip:
+    name: "{{ neovim_pip_packages }}"
+	

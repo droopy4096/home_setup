@@ -1,4 +1,4 @@
-  
+
 nerd_fonts_version: 3.0.2
 
 buildx_release: 0.16.2
@@ -34,7 +34,7 @@ homedir_configs:
   - .config/eza/theme.yml
 
 
-workspace_redhat_packages: 
+workspace_redhat_packages:
   - tmux
   - tmux-powerline
   - keychain
@@ -61,6 +61,8 @@ workspace_redhat_packages:
   - sudo
   - bat
   - eza
+  - fzf
+  - ansible
 
 workstation_redhat_packages:
   - neovim-qt
@@ -70,7 +72,7 @@ workstation_redhat_packages:
 workspace_debian_packages:
   - tmux
   - tmux-themepack-jimeh
-  - powerline 
+  - powerline
   - keychain
   - git
   - jq
@@ -94,6 +96,8 @@ workspace_debian_packages:
   - sudo
   - bat
   - exa
+  - fzf
+  - ansible
 
 workstation_debian_packages:
   - neovim-qt
@@ -113,3 +117,6 @@ asdf_packages:
   # - kubectl
   - helm
   - glow
+
+neovim_pip_packages:
+  - ansible-lint
