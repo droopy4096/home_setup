@@ -186,6 +186,7 @@ return {
         -- dockerls
         "dockerfile-language-server",
         "ansible-language-server",
+        "autotools-language-server",
       })
     end,
   },
