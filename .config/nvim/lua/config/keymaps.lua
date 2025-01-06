@@ -94,6 +94,9 @@ if vim.env.GITLAB_TOKEN ~= nil and vim.env.GITLAB_TOKEN ~= "" then
   vim.keymap.set("n", "<leader>glrd", gitlab.delete_reviewer, { desc = "GitLab MR: delete reviewer" })
   vim.keymap.set("n", "<leader>glp", gitlab.pipeline, { desc = "GitLab MR: pipeline" })
   vim.keymap.set("n", "<leader>glo", gitlab.open_in_browser, { desc = "GitLab MR: open in browser" })
+  -- Toggle Code Suggestions on/off with CTRL-g in normal mode:
+  -- vim.keymap.set('n', '<leader>gls', '<Plug>(GitLabToggleCodeSuggestions)', { desc = "GiLab Duo: Toggle code suggestions" })
+  -- vim.keymap.set('n', '<C-g>', '<Plug>(GitLabToggleCodeSuggestions)', { desc = "GitLab Duo: Toggle code suggestions" })
 end
 
 local gitsigns = require("gitsigns")

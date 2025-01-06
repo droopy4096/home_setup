@@ -14,3 +14,7 @@ vim.opt.titlestring = 'nvim %{expand("%:p")}'
 vim.g.autoformat = false
 
 -- vim.g.winbar="%f"
+
+-- Omni-completion dialog even for single suggestion
+vim.o.completeopt = 'menu,menuone'
+
