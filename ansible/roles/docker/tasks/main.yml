@@ -1,11 +1,11 @@
-- name: add user to docker group
+- name: Install Packages
+  ansible.builtin.include_role:
+    name: geerlingguy.docker
+  when: "ansible_facts['os_family'] == 'Debian'"
+
+- name: Add user to docker group
   ansible.builtin.user:
     name: "{{ ansible_user }}"
     groups: docker
     append: yes
   become: true
-
-- name: Install Packages
-  ansible.builtin.include_role: 
-    name: geerlingguy.docker
-  when: "ansible_facts['os_family'] == 'Debian'"
