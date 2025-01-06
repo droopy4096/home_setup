@@ -1,7 +1,7 @@
 #!/bin/sh -x
 
 INVENTORY=${INVENTORY:-"localhost,"}
-if [ "${INVENTORY}" == "localhost," ]; then
+if [ "${INVENTORY}" = "localhost," ]; then
     CONNECTION_TYPE="-c local"
 fi
 if [ -n "${INVENTORY_HOST}" ]; then
