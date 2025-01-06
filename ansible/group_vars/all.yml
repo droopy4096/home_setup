@@ -83,7 +83,6 @@ workspace_debian_packages:
   - podman
   - skopeo
   - buildah
-  - docker.io
   # neovim-related:
   - neovim
   # Zsh-related
@@ -91,7 +90,6 @@ workspace_debian_packages:
   - zsh-autosuggestions
   - zsh-syntax-highlighting
   - python3-pip
-  - docker-compose
   - gpg
   - sudo
   - bat
