@@ -130,6 +130,7 @@ end)
 vim.keymap.set("n", "gR", function()
   require("trouble").toggle("lsp_references")
 end)
+vim.keymap.set("n", "<leader>cT", [[<Cmd>Trouble todo<CR>]])
 
 -- vim.keymap.set(
 --     {'n', 'v', 's', 'x', 'o', 'i', 'l', 'c', 't'},
