@@ -15,6 +15,9 @@ return {
       -- FIXME: 
       -- opts.sections.lualine_c = { git_root }
       opts.sections.lualine_c = {}
+      --if not vim.g.trouble_lualine then
+      table.insert(opts.sections.lualine_c, { "navic", color_correction = "dynamic" })
+      --end
       -- opts.inactive_sections.lualine_c = {}
     end,
   }

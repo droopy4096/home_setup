@@ -154,3 +154,5 @@ if vim.env.TMUX ~= nil then
   vim.keymap.set("n", "<leader>Tm-", ":!tmux split-window -c %:h -v -l 15<CR>", { desc = "Tmux horizontal split" })
   vim.keymap.set("n", "<leader>Tm|", ":!tmux split-window -c %:h -h<CR>", { desc = "Tmux vertical split" })
 end
+
+vim.keymap.set("n", "<leader>cO", [[<Cmd>TSContextToggle<CR>]], {desc = "Toggle Code context display"})
