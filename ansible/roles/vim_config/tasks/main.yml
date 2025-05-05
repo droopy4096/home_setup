@@ -1,5 +1,8 @@
 ---
 
+- name: Install pre-requisites
+  ansible.builtin.include_tasks: "{{ ansible_facts['os_family']|lower }}_packages.yml"
+
 - name: Add vim configs
   ansible.builtin.file:
     src: ~/work/home_setup/{{ item }}
