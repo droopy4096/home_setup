@@ -1,0 +1,10 @@
+- name: Install Debian Packages
+  ansible.builtin.apt:
+    name:
+      - ansible-lint
+      - python-is-python3
+      # solargraph requirements
+      - ruby
+      - ruby-dev
+    state: latest
+  become: true

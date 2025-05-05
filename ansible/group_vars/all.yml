@@ -117,6 +117,9 @@ asdf_packages:
   # - kubectl
   - helm
   - glow
+  # some NeoVim extensions use npm
+  - node 
 
 neovim_pip_packages:
   - ansible-lint
+  - basedpyright
