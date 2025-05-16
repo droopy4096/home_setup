@@ -96,6 +96,8 @@ workspace_debian_packages:
   - exa
   - fzf
   - ansible
+  - libxcb-shape0
+  - libxcb-xfixes0
 
 workstation_debian_packages:
   - neovim-qt
