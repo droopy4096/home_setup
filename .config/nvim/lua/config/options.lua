@@ -13,8 +13,15 @@ vim.opt.titlestring = 'nvim %{expand("%:p")}'
 
 vim.g.autoformat = false
 
+-- Turn off AI 
+vim.g.ai_cmp = false
+
+
 -- vim.g.winbar="%f"
 
 -- Omni-completion dialog even for single suggestion
 vim.o.completeopt = 'menu,menuone'
 
+-- Enable the option to require a Prettier config file
+-- If no prettier config file is found, the formatter will not be used
+vim.g.lazyvim_prettier_needs_config = false
