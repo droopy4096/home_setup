@@ -174,7 +174,8 @@ return {
     },
   },
   {
-    "williamboman/mason.nvim",
+    "mason-otg/mason.nvim",
+    version = "^1.0.0",
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, {
@@ -198,7 +199,7 @@ return {
     optional = true,
     dependencies = {
       {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         opts = function(_, opts)
           opts.ensure_installed = opts.ensure_installed or {}
           vim.list_extend(opts.ensure_installed, { "gomodifytags", "impl" })
