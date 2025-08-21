@@ -76,6 +76,7 @@ return {
         -- Ruby:
         solargraph = {},
         -- Golang:
+        -- https://www.lazyvim.org/extras/lang/go
         gopls = {
           keys = {
             -- Workaround for the lack of a DAP strategy in neotest-go: https://github.com/nvim-neotest/neotest-go/issues/12
@@ -149,6 +150,7 @@ return {
         end,
         -- Golang:
         gopls = function(_, opts)
+          -- https://www.lazyvim.org/extras/lang/go
           -- workaround for gopls not supporting semanticTokensProvider
           -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
           LazyVim.lsp.on_attach(function(client, _)
@@ -172,7 +174,8 @@ return {
     },
   },
   {
-    "williamboman/mason.nvim",
+    "mason-otg/mason.nvim",
+    version = "^1.0.0",
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
       vim.list_extend(opts.ensure_installed, {
@@ -187,6 +190,7 @@ return {
         "dockerfile-language-server",
         "ansible-language-server",
         -- "autotools-language-server",
+        "prettier"
       })
     end,
   },
@@ -195,7 +199,7 @@ return {
     optional = true,
     dependencies = {
       {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         opts = function(_, opts)
           opts.ensure_installed = opts.ensure_installed or {}
           vim.list_extend(opts.ensure_installed, { "gomodifytags", "impl" })
@@ -209,6 +213,7 @@ return {
         nls.builtins.code_actions.impl,
         nls.builtins.formatting.goimports,
         nls.builtins.formatting.gofumpt,
+        nls.builtins.formatting.prettier,
       })
     end,
   },
