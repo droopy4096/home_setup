@@ -146,6 +146,17 @@ if command -v helm > /dev/null; then
   compdef h=helm
 fi
 
+# re-import SSH_* vars
+function ssh_reauth(){
+  eval $(tmux show-env -s |grep '^SSH_')
+}
+
+alias tmux_ssh_reauth=ssh_reauth
+
+if [[ -n "$TMUX" ]]; then 
+  ssh_reauth
+fi
+
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 

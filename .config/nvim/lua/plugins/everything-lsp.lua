@@ -76,6 +76,7 @@ return {
         -- Ruby:
         solargraph = {},
         -- Golang:
+        -- https://www.lazyvim.org/extras/lang/go
         gopls = {
           keys = {
             -- Workaround for the lack of a DAP strategy in neotest-go: https://github.com/nvim-neotest/neotest-go/issues/12
@@ -149,6 +150,7 @@ return {
         end,
         -- Golang:
         gopls = function(_, opts)
+          -- https://www.lazyvim.org/extras/lang/go
           -- workaround for gopls not supporting semanticTokensProvider
           -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
           LazyVim.lsp.on_attach(function(client, _)

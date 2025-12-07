@@ -1,0 +1,6 @@
+---
+
+roles:
+  - src: https://github.com/geerlingguy/ansible-role-docker
+    name: geerlingguy.docker
+    version: 7.4.3
