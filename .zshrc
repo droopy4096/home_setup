@@ -151,6 +151,27 @@ function ssh_reauth(){
   eval $(tmux show-env -s |grep '^SSH_')
 }
 
+function _pwd(){
+  echo ${PWD##*/}
+}
+
+function _term_title(){
+  local _action=${1:-zsh}
+  local _action2=${2}
+  local _action3=${3}
+  case "$TERM" in 
+    xterm*)
+      # echo -en "\e]0;${PWD##*/} (zsh)\a" #-- Set icon name and window title to string
+      echo -en "\e]2;${PWD##*/} ($_action)\a"
+      # echo -en "\e]1;string\a" #-- Set icon name to string
+      # echo -en "\e]2;string\a" #-- Set window title to string
+      ;;
+  esac
+}
+
+add-zsh-hook precmd _term_title
+add-zsh-hook preexec _term_title
+
 alias tmux_ssh_reauth=ssh_reauth
 
 if [[ -n "$TMUX" ]]; then 

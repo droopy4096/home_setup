@@ -68,3 +68,35 @@ wk.setup({
   -- use classic layout - horizontal at the bottom
   preset = "classic",
 })
+
+--[==[
+vim.lsp.enable('gitlab_duo')
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local bufnr = args.buf
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+
+    if vim.lsp.inline_completion and
+       client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, bufnr) then
+      vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
+
+      -- Tab to accept suggestion
+      vim.keymap.set('i', '<Tab>', function()
+        if vim.lsp.inline_completion.is_visible() then
+          return vim.lsp.inline_completion.accept()
+        else
+          return '<Tab>'
+        end
+      end, { expr = true, buffer = bufnr, desc = 'GitLab Duo: Accept suggestion' })
+
+      -- Alt/Option+[ for previous suggestion
+      vim.keymap.set('i', '<M-[>', vim.lsp.inline_completion.select_prev,
+        { buffer = bufnr, desc = 'GitLab Duo: Previous suggestion' })
+
+      -- Alt/Option+] for next suggestion
+      vim.keymap.set('i', '<M-]>', vim.lsp.inline_completion.select_next,
+        { buffer = bufnr, desc = 'GitLab Duo: Next suggestion' })
+    end
+  end
+})
+--]==]

@@ -35,3 +35,4 @@ set shiftwidth=2
 " set autochdir
 
 " "colorscheme catppuccin-mocha
+set notitle

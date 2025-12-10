@@ -29,3 +29,4 @@ o.tabstop = 2
 o.expandtab = true
 o.softtabstop = 2
 o.shiftwidth = 2
+o.title = false

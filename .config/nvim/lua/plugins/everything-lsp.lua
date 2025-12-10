@@ -9,6 +9,7 @@ return {
       -- autoformat now is under vim.g.autoformat
       -- autoformat = false,
       servers = {
+        -- gitlab_duo = {},
         lemminx = {},
         yamlls = {
           capabilities = {
@@ -74,7 +75,21 @@ return {
           },
         },
         -- Ruby:
-        solargraph = {},
+        solargraph = {
+          mason = false,
+          enabled = true,
+          diagnostics = false,
+        },
+        ruby_lsp = {
+          mason = false,
+          enabled = false,
+          -- cmd = { vim.env.HOME .. "/bin/ruby-lsp" },
+        },
+        rubocop = {
+          mason = false,
+          enabled = false,
+          -- cmd = { "bundle", "exec", "rubocop", "--parallel" }
+        },
         -- Golang:
         -- https://www.lazyvim.org/extras/lang/go
         gopls = {
@@ -184,6 +199,8 @@ return {
         "gofumpt",
         -- Ruby:
         "solargraph",
+        -- "ruby-lsp",
+        "rubocop",
         -- Helm
         "helm-ls",
         -- dockerls
@@ -233,5 +250,4 @@ return {
   {
     "mfussenegger/nvim-ansible",
   }
-  
 }

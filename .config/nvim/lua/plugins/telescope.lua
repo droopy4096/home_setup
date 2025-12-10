@@ -1,3 +1,6 @@
+local builtin = require('telescope.builtin')
+local actions = require('telescope.actions')
+
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -13,6 +16,15 @@ return {
     -- change some options
     opts = {
       defaults = {
+        mappings = {
+          i = {
+            ["<c-d>"] = actions.delete_buffer
+          },
+          n = {
+            ["<c-d>"] = actions.delete_buffer,
+            ["dd"] = actions.delete_buffer,
+          }
+        },
         layout_strategy = "horizontal",
         layout_config = {
           horizontal = {
