@@ -168,6 +168,9 @@ return {
         },
         dockerls = { },
         ansiblels = { },
+        helm_ls = {
+
+        },
       },
       setup = {
         -- YAML:

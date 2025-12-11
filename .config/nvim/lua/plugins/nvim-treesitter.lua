@@ -17,6 +17,8 @@ return {
           "bash",
           "hcl",
           "terraform",
+          "yaml",
+          "helm",
         })
       end
     end,
