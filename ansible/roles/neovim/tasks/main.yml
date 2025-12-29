@@ -4,4 +4,3 @@
 - name: Install Ansible-Lint
   ansible.builtin.pip:
     name: "{{ neovim_pip_packages }}"
-	
