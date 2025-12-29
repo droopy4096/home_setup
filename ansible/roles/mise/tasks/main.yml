@@ -10,12 +10,12 @@
     creates: "~/.local/share/mise/shims/{{ item }}"
   with_items: "{{ asdf_packages }}"
 
-- name: install lemminx
-  ansible.builtin.shell: |
-    mise plugin add  lemminx https://github.com/droopy4096/asdf-lemminx.git
-    mise install lemminx
-    mise use -g lemminx@latest
-  when: "{{ lemminx_enabled }}"
+# - name: install lemminx
+#   ansible.builtin.shell: |
+#     mise plugin add  lemminx https://github.com/droopy4096/asdf-lemminx.git
+#     mise install lemminx
+#     mise use -g lemminx@latest
+#   when: "{{ lemminx_enabled }}"
 
 - name: Install jless
   ansible.builtin.shell: |
