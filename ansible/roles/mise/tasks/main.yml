@@ -15,6 +15,7 @@
     mise plugin add  lemminx https://github.com/droopy4096/asdf-lemminx.git
     mise install lemminx
     mise use -g lemminx@latest
+  when: "{{ lemminx_enabled }}"
 
 - name: Install jless
   ansible.builtin.shell: |

@@ -122,3 +122,5 @@ asdf_packages:
 neovim_pip_packages:
   - ansible-lint
   - basedpyright
+
+lemminx_enabled: false
