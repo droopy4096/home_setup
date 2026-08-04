@@ -33,7 +33,6 @@ homedir_configs:
   - .config/bat/config
   - .config/eza/theme.yml
 
-
 workspace_redhat_packages:
   - tmux
   - tmux-powerline
