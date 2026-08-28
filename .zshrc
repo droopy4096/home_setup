@@ -66,7 +66,6 @@ fi
 #
 #=====================================
 
-# eval $(keychain -q --eval --inherit any)
 eval $(keychain -q --eval --ssh-allow-forwarded)
 
 add_to_path(){
